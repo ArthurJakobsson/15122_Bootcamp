@@ -33,7 +33,8 @@ static int checkNull(void *pointer);
 typedef struct triangle {
     int** data;
     int size;
-} trangle;
+} triangle;
+
 
 
 triangle *generate(triangle *myTri, int numRows) {
@@ -46,11 +47,12 @@ triangle *generate(triangle *myTri, int numRows) {
         if(!checkNull(triangle[i])){ perror("Malloc returned NULL");}
         triangle[i][0] = 1;  // First element of each row is always 1.
         for (int j = 1; j < i; j++) {
+            printf("%d", triangle[i][j]);
             triangle[i][j] = triangle[i-1][j-1] + triangle[i-1][j];  // Calculate each element of the current row.
         }
         triangle[i][i] = 1;  // Last element of each row is always 1.
     }
-    return triangle;
+    return myTri;
 }
 
 int main() {
@@ -58,14 +60,14 @@ int main() {
 
     triangle *myTriangle = (triangle *) malloc(1*sizeof(triangle));
     if(!checkNull(myTriangle)){ perror("Malloc returned NULL");}
-    int** triangle = generate(myTriangle, numRows);
-    print_triangle(triangle->data, numRows); //Just prints the triangle
+    myTriangle = generate(myTriangle, numRows);
+    print_triangle(myTriangle->data, numRows); //Just prints the triangle
 
 
     for (int i = 0; i < numRows; ++i) {
-        free(triangle[i]);
+        free(myTriangle->data[i]);
     }
-    free(triangle);
+    free(myTriangle);
     return 0;
 }
 
