@@ -1,0 +1,129 @@
+\newcommand{\dirname}{\lstinline'sample-handout'}
+\newcommand{\tgzname}{\dirname \lstinline'.tgz'}
+
+\section*{Completing a Programming Assignment}
+
+In this section, we'll walk through the steps of downloading,
+completing, and submitting a programming assignment. You'll do this
+for each assignment, so come back here if you get confused.
+
+You will be primarily using the command \lstinline'autolab122' to
+interact with \autolab{}.  You can also use the \autolab{} web site
+(\href{\autolabURL}{\autolabURL}) if you prefer.
+
+
+\begin{part}\TAGS{unix}
+To begin with, you need to do a one-time setup for \lstinline'autolab122'.
+Simply run
+\begin{lstlisting}[language={[coin]C}]
+% autolab122 setup
+\end{lstlisting}\vspace{-1.5ex}
+and follow the instructions.  You will not need to do this again.
+Here's a sample interaction.
+\begin{center}
+\includegraphics[width=0.75\linewidth]{\img/autolab122-setup.png}
+\end{center}
+\end{part}
+
+
+\begin{part}\TAGS{unix}
+  Make sure you are in the \lstinline[language={[coin]C}]'private/15122'
+  directory by entering the command
+  \underline{\lstinline[language={[coin]C}]'pwd'} to get the
+    \textbf{\color{red}p}resent
+  \textbf{\color{red}w}orking \textbf{\color{red}d}irectory. You should see something like this with your andrew id
+  instead of \lstinline[language={[coin]C}]'<your_id>':
+
+\begin{lstlisting}[language={[coin]C}]
+% pwd
+/afs/andrew.cmu.edu/<usr_number>/<your_id>/private/15122
+\end{lstlisting}\vspace{-1.5ex}
+If you ever get lost, you can go there by entering
+\begin{lstlisting}[language={[coin]C}]
+% cd
+% cd private/15122
+\end{lstlisting}\vspace{-1.5ex}
+\end{part}
+
+
+\begin{part}\TAGS{unix}
+  You can list the currently released assignments by running
+\begin{lstlisting}[language={[coin]C}]
+% autolab122 hw
+  sample (Sample Assignment (UNGRADED))
+\end{lstlisting}\vspace{-1.5ex}
+You will see the assignment called \lstinline'sample' --- the
+description in parentheses is for your information only --- and
+possibly other material we are distributing through \autolab{}.  You
+will be using this name (\lstinline'sample') when interacting with
+Autolab about this assignment.
+\end{part}
+
+
+\begin{part}\TAGS{unix}
+  Download the starter code for assignment \lstinline'sample' with
+  the following command:
+\begin{lstlisting}[language={[coin]C}]
+% autolab122 download sample
+Querying assessment 'sample' of course '15122-[*\shortsem*]' ...
+Creating directory /home/iliano/TMP/sample
+Handout downloaded into assessment directory
+Writeup downloaded into assessment directory
+
+Due: Mon Jun 29 18:00:00 2020
+sample successfully downloaded.
+\end{lstlisting}\vspace{-1.5ex}
+This creates a directory called \lstinline'sample' with the following
+contents:
+\begin{lstlisting}[language={[coin]C}]
+% ls sample
+factorial.c0  favorite_number.c0  README.txt
+\end{lstlisting}\vspace{-1.5ex}
+The file \lstinline'README.txt' tells you how to compile the
+assignment and how to submit it.  The other files are what you'll be
+working on.
+\end{part}
+
+
+
+
+\input{editing}
+\input{compilation}
+
+
+\subsection*{Submitting Programming Assignments}
+
+\begin{part}
+You will submit the assignment by typing the following
+at the Unix prompt:
+\begin{lstlisting}[language={[coin]C}]
+% autolab122 handin sample factorial.c0 favorite_number.c0
+\end{lstlisting}\vspace{-1.5ex}
+The command to type is always written at the bottom of the file
+\lstinline'README.txt' that comes with each assignment.
+
+This command will ask you to acknowledge the academic integrity policy
+of the class and then submit the files to \autolab{}.  Once \autolab{}
+is done grading this submission, it will display your scores.  Here's
+the full output:
+\begin{lstlisting}[language={[coin]C}, deletekeywords={for},
+  deletedelim={[l]{Type\ }}, deletestring={[b]{'}}]
+% autolab122 handin sample factorial.c0 favorite_number.c0
+Type "yes" to affirm that you have complied with this course's
+academic integrity policy as defined in the syllabus: yes
+Submitting to 15122-[*\shortsem*]:sample ... (force)
+Successfully submitted to Autolab (version 1)
+
+Waiting for scores to be ready ...
+Scores for 15122-[*\shortsem*]:sample
+ version | handin (1.0) | editing (1.0) |
++---------+--------------+---------------+
+|       1 |          1.0 |           0.0 |
+\end{lstlisting}
+
+At this point, you can see the overall \autolab{} feedback with
+\begin{lstlisting}[language={[coin]C}]
+% autolab122 feedback
+\end{lstlisting}
+\chkptB
+\end{part}

@@ -1,0 +1,49 @@
+\documentclass[lab]{inc/122handout}
+\newcommand{\labnum}{01}
+\mfcsnumber{\labnum: Setup}
+%\mfcsdate{\formatdate{29}{08}{\YEAR}}
+\mfcsdate{by \formatdate{17}{01}{\YEAR}}
+
+\newcommand{\lapsessionTime}{Wednesday from 6 to 8pm EDT}
+\newcommand{\lapsessionPlace}{TBA}
+
+\pagestyle{fancyplain}
+\setlength{\headheight}{14pt}
+\setlength{\headsep}{12pt}
+\lhead{\fancyplain{}{\large \qatoolName{} access code: \textbf{\qatoolSignupKey}}}
+\chead[]{}
+\rhead{\fancyplain{}{\large Gradescope access code: \textbf{\gradescopeEntryCode}}}
+
+
+\definecolor{clustercomputer}{RGB}{227,219,255}
+\definecolor{laptop}{RGB}{230,255,219}
+\newenvironment{colorpar}[1]
+{\OuterFrameSep=0ex
+\colorlet{shadecolor}{#1}%
+\begin{snugshade*}}
+{\end{snugshade*}}
+
+%% Is the semester on campus
+\newif\ifoncampus
+\oncampustrue  % Yes
+%\oncampusfalse % No
+
+
+\begin{document}
+\thispagestyle{empty}
+% \begin{center}\bf
+% This first lab is \underline{UNGRADED}.
+% \end{center}
+As you start this lab (and any future lab), please take care to
+read an \emph{entire} part before doing anything the part asks you to
+do. There are often important caveats or secondary instructions that
+we have to give \emph{after} the initial instruction in order for them
+to make sense.
+
+\inputQuestion{unix}
+\inputQuestion{envvar}
+\inputQuestion{sample-prog}
+\inputQuestion{sample-written}
+%\inputQuestion{quizzes}
+\inputQuestion{activities}
+\end{document}
