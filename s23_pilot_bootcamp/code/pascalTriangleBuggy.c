@@ -46,8 +46,7 @@ triangle *generate(triangle *myTri, int numRows) {
         triangle[i] = (int*) malloc((i+1) * sizeof(int));
         if(!checkNull(triangle[i])){ perror("Malloc returned NULL");}
         triangle[i][0] = 1;  // First element of each row is always 1.
-        for (int j = 1; j < i; j++) {
-            printf("%d", triangle[i][j]);
+        for (int j = 1; j < i; j++) {i
             triangle[i][j] = triangle[i-1][j-1] + triangle[i-1][j];  // Calculate each element of the current row.
         }
         triangle[i][i] = 1;  // Last element of each row is always 1.
