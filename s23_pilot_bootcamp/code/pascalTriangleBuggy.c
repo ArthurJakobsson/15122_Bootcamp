@@ -16,7 +16,9 @@
  * This is the NON-buggy implementation.
  *
  * @author Arthur Jakobsson <ajakobss@andrew.cmu.edu>
+ * @author Liz Chu <echu2@andrew.cmu.edu>
  */
+
 
 
 /*
@@ -25,28 +27,23 @@
  */
 static void print_triangle(int** triangle, int numRows);
 
-static int checkNull(void *pointer);
-
-
-//Bugs are on line 38 (i+1)
-
-typedef struct triangle {
+typedef struct triangle_header {
     int** data;
-    int size;
+    long size;
 } triangle;
 
 
 
 triangle *generate(triangle *myTri, int numRows) {
     int** triangle = (int**) malloc(numRows * sizeof(int*));
-    if(!checkNull(triangle)){ perror("Malloc returned NULL");}
+    if(triangle==NULL){ perror("Malloc returned NULL");}
     myTri->data = triangle;
     myTri->size = numRows;
     for(int i = 0; i < numRows; i++) {
-        triangle[i] = (int*) malloc((i+1) * sizeof(int));
-        if(!checkNull(triangle[i])){ perror("Malloc returned NULL");}
+        triangle[i] = (int*) malloc( (i) * sizeof(int));
+        if(triangle[i]==NULL){ perror("Malloc returned NULL");}
         triangle[i][0] = 1;  // First element of each row is always 1.
-        for (int j = 1; j < i; j++) {i
+        for (int j = 1; j < i; j++) {
             triangle[i][j] = triangle[i-1][j-1] + triangle[i-1][j];  // Calculate each element of the current row.
         }
         triangle[i][i] = 1;  // Last element of each row is always 1.
@@ -58,14 +55,15 @@ int main() {
     int numRows = 7;
 
     triangle *myTriangle = (triangle *) malloc(1*sizeof(triangle));
-    if(!checkNull(myTriangle)){ perror("Malloc returned NULL");}
+    if(myTriangle==NULL){ perror("Malloc returned NULL");}
     myTriangle = generate(myTriangle, numRows);
     print_triangle(myTriangle->data, numRows); //Just prints the triangle
 
-
-    for (int i = 0; i < numRows; ++i) {
+    free((int *)myTriangle->size);
+    for (int i = 1; i < numRows-1; i++) {
         free(myTriangle->data[i]);
     }
+    free(myTriangle->data);
     free(myTriangle);
     return 0;
 }
@@ -88,13 +86,4 @@ void print_triangle(int** triangle, int numRows) { //just prints the triangle
         }
         printf("\n");
     }
-}
-
-int checkNull(void *pointer)
-{
-  if(pointer==NULL)
-  {
-    return 0;
-  }
-  return 1;
 }
