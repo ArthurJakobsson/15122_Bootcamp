@@ -82,19 +82,141 @@ void dna_free(dna_node_t *start)
   }
 }
 
-
-int test()
+/**
+ * @brief Create a Node object with content as the data
+ *
+ * @param content data to be stored in node
+ * @return dna_node_t* the new char
+ */
+dna_node_t *createNode(char content)
 {
-  for(int i=0; i<7; i++)
-  {
+  dna_node_t *new = xcalloc(sizeof(dna_node_t),1);
+  new->data = content;
+  return new;
+}
 
+/**
+ * @brief Get the Opposite DNA char type
+ *
+ * T-A and G-C
+ *
+ * @param content char to be flipped
+ * @return char flipped char
+ */
+char getOppositeDNA(char content)
+{
+  switch(content)
+  {
+    case 'A':
+      return 'T';
+      break;
+    case 'T':
+      return 'A';
+      break;
+    case 'G':
+      return 'C';
+      break;
+    case 'C':
+      return 'G';
+      break;
+    default:
+      printf("Impossible DNA element passed");
   }
 }
 
-// T-A
-// G-C
+/**
+ * @brief Create a Strand object from a string
+ *
+ * @param str string to be used to create a strand
+ * @param flip boolean to determine to make strand or flipped strand
+ * @return dna_node_t* the first node of the resultant linked list
+ */
+dna_node_t *createStrand(char *str, bool flip)
+{
+  dna_node_t *curr = NULL;
+  dna_node_t *start = NULL;
+  for(int i=0; str[i]!='\0' ;i++)
+  {
+    curr->data=createNode(!flip ? str[i] : getOppositeDNA(str[i]));
+    if(start==NULL)
+    {
+      start = curr;
+    }
+    curr=curr->next;
+  }
+  return start;
+}
 
+/**
+ * @brief Checks if two strands (linked lists) are equal
+ *
+ * (we give this to them?)
+ *
+ * @param first
+ * @param second
+ * @return true
+ * @return false
+ */
+bool strandEqual(dna_node_t *first, dna_node_t *second)
+{
+  while(first!=NULL)
+  {
+    if(second==NULL) //first longer than second
+    {
+      return false;
+    }
+    if(first->data != second->data)
+    {
+      return false; //data don't match
+    }
+    first=first->next;
+    second=second->next;
+  }
+  if(second!=NULL)
+  {
+    return false; //second longer than first
+  }
+  return true;
+}
+
+/**
+ * @brief Tester function (we hide this?)
+ *
+ * @return int
+ */
+void test()
+{
+  char test1[] = "AAAA";
+  char correctOutput1[] = "ATATATAT";
+  dna_node_t * test_1_strand_1 = createStrand(test1, false);
+  dna_node_t * test_1_strand_2 = createStrand(test1, true);
+  dna_node_t * test_1_correct_output = createStrand(correctOutput1, false);
+  dna_node_t * twistedDNA1 = twist_my_dna(test_1_strand_1, test_1_strand_2);
+  assert(strandEqual(test_1_correct_output, twistedDNA1));
+  dna_free(test_1_correct_output);
+  dna_free(twistedDNA1); //twisted should contain all the strand 1 and 2 nodes
+
+  char test2[] = "GGGG";
+  char correctOutput2[] = "GCGCGCGC";
+  dna_node_t * test_2_strand_1 = createStrand(test2, false);
+  dna_node_t * test_2_strand_2 = createStrand(test2, true);
+  dna_node_t * test_2_correct_output = createStrand(correctOutput2, false);
+  dna_node_t * twistedDNA2 = twist_my_dna(test_2_strand_1, test_2_strand_2);
+  assert(strandEqual(test_2_correct_output, twistedDNA2));
+  dna_free(test_2_correct_output);
+  dna_free(twistedDNA2);
+
+
+  return 1;
+}
+
+/**
+ * @brief Main function to call tester (we hide this too?)
+ *
+ * @return int
+ */
 int main()
 {
-  return test();
+  test();
+  return 0;
 }
