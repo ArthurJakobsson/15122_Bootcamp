@@ -1,19 +1,19 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <assert.h>
 
 /**
- * @file ex1_buggy.c
+ * @file ex1-correct.c
  * @brief Example (1) demonstrating print statement debugging (TA step-through)
  *
  * 15-122: Principles of Imperative Computation
- *
+ * Spring 2023 - Debugging in C Pilot Bootcamp
+ *   
  * Based on printing Fibonacci sequence taken from
  * https://quescol.com/interview-preparation/fibonacci-series-in-c-program
  *
- * Adapted for use in the 15122 C Bootcamp series.
- *
- * This is a BUGGY implementation.
+ * This is a CORRECT implementation.
  *
  * @author Liz Chu <echu2@andrew.cmu.edu>
  */
@@ -26,15 +26,19 @@ int fib(int n)
     int result = 0;
 
     if (n <= 1) return n;
-    
+
     for (int i = 1; i < n; i++)
     {
         result = first + second;
-        second = first;
-        first = result;
+        first = second; // this line is wrong in the buggy implementation
+        second = result; // this line is wrong in the buggy implementation
 
+        // (2) PRINT STATEMENT SHOULD CORRECTLY GO HERE
+        // printf("iter: %d, first: %d, second: %d, result: %d\n", i, first, second, result);
     }
 
+    // (1) FIRST INCORRECT PRINT STATEMENT GOES HERE
+    // printf("first: %d, second: %d, result: %d\n", first, second, result);
     return result;
 }
 
