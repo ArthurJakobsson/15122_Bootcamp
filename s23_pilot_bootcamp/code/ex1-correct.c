@@ -18,7 +18,10 @@
  * @author Liz Chu <echu2@andrew.cmu.edu>
  */
 
-
+/** 
+ * @brief computes nth term of the fibonacci sequence
+ * TODO: fix the bug in this function
+ */
 int fib(int n)
 {
     int first = 0; 

@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <assert.h>
+#include "lib/contracts.h"
 
 /**
  * @file ex2-correct.c
@@ -11,19 +12,30 @@
  * Spring 2023 - Debugging in C Pilot Bootcamp
  *   
  * Based on solution of removing duplicates from
- * https://leetcode.com/problems/remove-duplicates-from-sorted-list/solutions/3257316/c-python-c-java-easiest-solution-o-n-time/
+ * https://tinyurl.com/remove-dupes
  * 
  * This is a CORRECT implementation.
- *
+ * 
+ * @author Arthur Jakobsson <ajakobss@andrew.cmu.edu>
  * @author Liz Chu <echu2@andrew.cmu.edu>
  */
 
-// linked list node (containing integer data & next node pointer)
+/** @brief struct of linked list node (containing int data & next pointer) */
 typedef struct list_node {
     int data;
     struct list_node* next;
 } node;
 
+/*
+ * ---------------------------------------------------------------------------
+ *                           SHORT HELPER FUNCTIONS
+ * ---------------------------------------------------------------------------
+ */
+
+/** 
+ * @brief checks if list starting at node L is sorted 
+ * THIS IS A CORRECT FUNCTION! 
+ */
 bool is_sorted(node* L)
 {
     node* curr = L;
@@ -37,8 +49,15 @@ bool is_sorted(node* L)
     return true;
 }
 
+/** 
+ * @brief checks if list starting at node L has duplicates
+ * @pre list L has to be sorted
+ * THIS IS A CORRECT FUNCTION! 
+ */
 bool no_dupes(node* L)
 {
+    REQUIRES(is_sorted(L));
+
     node* curr = L;
     node* next = L->next;
     while (next != NULL)
@@ -50,8 +69,45 @@ bool no_dupes(node* L)
     return true;
 }
 
+/** 
+ * @brief helper function to free list
+ * THIS IS A CORRECT FUNCTION! 
+ */
+void free_list(node* L)
+{
+    while (L != NULL)
+    {
+        node* temp = L->next;
+        free(L);
+        L = temp;
+    }
+}
+
+/** 
+ * @brief prints out the lsit starting at L for debugging purposes
+ * TODO: IMPLEMENT ME TO HELP DEBUG
+ */
+void print_list(node* L) 
+{
+    node* curr = L;
+    while (curr != NULL)
+    {
+        printf("%d --> ", curr->data);
+        curr = curr->next;
+    }
+    printf("NULL\n");
+}
+
+/* ---------------------- END SHORT HELPER FUNCTIONS ----------------------- */
+
+/**
+ * @brief removes duplicates from a sorted list starting at L
+ * @pre list L must be sorted
+ * TODO: fix the bug in this function
+ */
 node* remove_duplicates(node* L)
 {
+    REQUIRES(is_sorted(L)); 
     node* curr = L;
     while (curr != NULL && curr->next != NULL)
     {
@@ -65,27 +121,6 @@ node* remove_duplicates(node* L)
         }
     }
     return L;
-}
-
-void print_list(node* L) // ask students to write this function 
-{
-    node* curr = L;
-    while (curr != NULL)
-    {
-        printf("%d --> ", curr->data);
-        curr = curr->next;
-    }
-    printf("NULL\n");
-}
-
-void free_list(node* L)
-{
-    while (L != NULL)
-    {
-        node* temp = L->next;
-        free(L);
-        L = temp;
-    }
 }
 
 int main()
@@ -114,7 +149,6 @@ int main()
     print_list(L2);
     assert(is_sorted(L1) && no_dupes(L1));
     assert(is_sorted(L2) && no_dupes(L2));
-
 
     printf("All tests passed!\n");
     free_list(L1);
