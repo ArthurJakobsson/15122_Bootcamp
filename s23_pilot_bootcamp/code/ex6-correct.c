@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <assert.h>
+#include "lib/xalloc.h"
 
 /**
  * @file ex1-bad.c
@@ -23,10 +24,10 @@ typedef struct dna_node dna_node_t;
 /**
  * @brief Simple singly linked list (NULL terminated)
 */
-typedef struct dna_node {
+struct dna_node {
     char data;
     dna_node_t *next;
-} dna_node_t;
+};
 
 
 /**
@@ -66,9 +67,11 @@ bool check_list(dna_node_t *start)
   dna_node_t *curr = start;
   while(curr!=NULL)
   {
-    printf("_%c_", curr->data); // this doesn't seem to be the most helpful for debugging this problem...
+    printf("%c_", curr->data); // this doesn't seem to be the most helpful for debugging this problem...
     curr=curr->next;
   }
+  printf("\n");
+  return true;
 }
 
 void dna_free(dna_node_t *start)
@@ -122,6 +125,8 @@ char getOppositeDNA(char content)
     default:
       printf("Impossible DNA element passed");
   }
+  printf("Failed to invert");
+  return 'X';
 }
 
 /**
@@ -135,14 +140,22 @@ dna_node_t *createStrand(char *str, bool flip)
 {
   dna_node_t *curr = NULL;
   dna_node_t *start = NULL;
-  for(int i=0; str[i]!='\0' ;i++)
+  for(int i=0; str[i]!='\0';i++)
   {
-    curr->data=createNode(!flip ? str[i] : getOppositeDNA(str[i]));
-    if(start==NULL)
-    {
-      start = curr;
+    char input;
+    if(!flip){
+      input = str[i];
+    } else {
+      input = getOppositeDNA(str[i]);
     }
-    curr=curr->next;
+    if(start == NULL)
+    {
+      start = createNode(input);
+      curr = start;
+    } else {
+      curr->next = createNode(input);
+      curr = curr->next;
+    }
   }
   return start;
 }
@@ -205,9 +218,6 @@ void test()
   assert(strandEqual(test_2_correct_output, twistedDNA2));
   dna_free(test_2_correct_output);
   dna_free(twistedDNA2);
-
-
-  return 1;
 }
 
 /**

@@ -37,15 +37,9 @@ typedef struct triangle_header {
  * @brief prints out triangle, given number of rows
  * THIS IS A CORRECT FUNCTION!
 */
-<<<<<<< HEAD
-void print_triangle(int** triangle, int numRows)
+void print_triangle(int** tri, int numRows)
 {
     for (int i = 0; i < numRows; i++)
-=======
-void print_triangle(int** tri, int numRows) 
-{ 
-    for (int i = 0; i < numRows; i++) 
->>>>>>> 67aeabd5036bbb0fda076f7b0f8f8a9530c36346
     {
         for (int j = 0; j <= i; j++)
         {
@@ -63,35 +57,20 @@ void print_triangle(int** tri, int numRows)
  */
 triangle *generate(triangle* my_tri, int num_rows)
 {
-<<<<<<< HEAD
-    int** triangle = xmalloc(num_rows * sizeof(int*));
-
-    my_tri->data = triangle;
-=======
     int** tri_data = xcalloc(num_rows, sizeof(int*));
-    
+
     my_tri->data = tri_data;
->>>>>>> 67aeabd5036bbb0fda076f7b0f8f8a9530c36346
     my_tri->size = num_rows;
 
     for (int i = 0; i < num_rows; i++)
     {
-<<<<<<< HEAD
-        triangle[i] = xmalloc((i) * sizeof(int));
-        triangle[i][0] = 1;  // first element of each row is always 1
-=======
-        tri_data[i] = xmalloc((i) * sizeof(int)); 
+        tri_data[i] = xmalloc((i) * sizeof(int));
         tri_data[i][0] = 1;  // first element of each row is always 1
->>>>>>> 67aeabd5036bbb0fda076f7b0f8f8a9530c36346
 
         for (int j = 1; j < i; j++)
         {
             // calculate each element of the current row
-<<<<<<< HEAD
-            triangle[i][j] = triangle[i-1][j-1] + triangle[i-1][j];
-=======
-            tri_data[i][j] = tri_data[i-1][j-1] + tri_data[i-1][j];  
->>>>>>> 67aeabd5036bbb0fda076f7b0f8f8a9530c36346
+            tri_data[i][j] = tri_data[i-1][j-1] + tri_data[i-1][j];
         }
         tri_data[i][i] = 1;  // last element of each row is always 1
     }
