@@ -1,17 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <stdbool.h>
 #include "lib/xalloc.h"
 
 /**
  * @file ex4-bad.c
  * @brief Example (4) practicing valgrind debugging (student)
- * 
+ *
  * 15-122: Principles of Imperative Computation
  * Spring 2023 - Debugging in C Pilot Bootcamp
  *
  * Based on Pascal's Triangle on Leetcode
- * https://tinyurl.com/PascalTriangleAnswer 
+ * https://tinyurl.com/PascalTriangleAnswer
  *
  * This is a BUGGY implementation.
  *
@@ -31,15 +32,15 @@ typedef struct triangle_header {
     long size;
 } triangle;
 
-/** 
+/**
  * @brief prints out triangle, given number of rows
  * THIS IS A CORRECT FUNCTION!
 */
-void print_triangle(int** triangle, int numRows) 
-{ 
-    for (int i = 0; i < numRows; i++) 
+void print_triangle(int** triangle, int numRows)
+{
+    for (int i = 0; i < numRows; i++)
     {
-        for (int j = 0; j <= i; j++) 
+        for (int j = 0; j <= i; j++)
         {
             printf("%d ", triangle[i][j]);
         }
@@ -49,37 +50,37 @@ void print_triangle(int** triangle, int numRows)
 
 /* ---------------------- END SHORT HELPER FUNCTIONS ----------------------- */
 
-/** 
+/**
  * @brief generates a pascal's triangle, given a struct and number of rows
  * TODO: fix the bug in this function
  */
-triangle *generate(triangle* my_tri, int num_rows) 
+triangle *generate(triangle* my_tri, int num_rows)
 {
     int** triangle = xmalloc(num_rows * sizeof(int*));
-    
+
     my_tri->data = triangle;
     my_tri->size = num_rows;
-    
-    for (int i = 0; i < num_rows; i++) 
+
+    for (int i = 0; i < num_rows; i++)
     {
-        triangle[i] = xmalloc((i) * sizeof(int)); 
+        triangle[i] = xmalloc((i) * sizeof(int));
         triangle[i][0] = 1;  // first element of each row is always 1
 
-        for (int j = 1; j < i; j++) 
+        for (int j = 1; j < i; j++)
         {
             // calculate each element of the current row
-            triangle[i][j] = triangle[i-1][j-1] + triangle[i-1][j];  
+            triangle[i][j] = triangle[i-1][j-1] + triangle[i-1][j];
         }
         triangle[i][i] = 1;  // last element of each row is always 1
     }
     return my_tri;
 }
 
-/** 
+/**
  * @brief creates a pascal's triangle, prints it, and frees all alloc'ed memory
  * TODO: fix all the memory bugs in this function
  */
-int main() 
+int main()
 {
     int num_rows = 7;
 
@@ -88,8 +89,8 @@ int main()
     my_triangle = generate(my_triangle, num_rows);
     print_triangle(my_triangle->data, num_rows); // just prints the triangle
 
-    free((int*)my_triangle->size); 
-    for (int i = 0; i < num_rows - 1; i++) 
+    free((int*)my_triangle->size);
+    for (int i = 0; i < num_rows - 1; i++)
     {
         free(my_triangle->data[i]);
     }
