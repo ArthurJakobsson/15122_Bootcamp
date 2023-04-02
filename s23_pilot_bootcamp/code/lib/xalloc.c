@@ -6,18 +6,16 @@
  * Frank Pfenning
  */
 
-#ifndef XALLOC_H
-#define XALLOC_H
-
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include "xalloc.h"
 
 /* xcalloc(nobj, size) returns a non-NULL pointer to
  * array of nobj objects, each of size size and
  * exits if the allocation fails.  Like calloc, the
  * array is initialized with zeroes.
  */
-static inline void* xcalloc(size_t nobj, size_t size) {
+void* xcalloc(size_t nobj, size_t size) {
   void* p = calloc(nobj, size);
   if (p == NULL) {
     fprintf(stderr, "allocation failed\n");
@@ -30,7 +28,7 @@ static inline void* xcalloc(size_t nobj, size_t size) {
  * an object of size size and exits if the allocation
  * fails.  Like malloc, no initialization is guaranteed.
  */
-static inline void* xmalloc(size_t size) {
+void* xmalloc(size_t size) {
   void* p = malloc(size);
   if (p == NULL) {
     fprintf(stderr, "allocation failed\n");
@@ -38,6 +36,3 @@ static inline void* xmalloc(size_t size) {
   }
   return p;
 }
-
-
-#endif

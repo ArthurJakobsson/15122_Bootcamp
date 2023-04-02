@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <errno.h>
 #include "lib/xalloc.h"
 
@@ -35,13 +36,13 @@ typedef struct triangle_header {
  * @brief prints out triangle, given number of rows
  * THIS IS A CORRECT FUNCTION!
 */
-void print_triangle(int** triangle, int numRows) 
+void print_triangle(int** tri, int numRows) 
 { 
     for (int i = 0; i < numRows; i++) 
     {
         for (int j = 0; j <= i; j++) 
         {
-            printf("%d ", triangle[i][j]);
+            printf("%d ", tri[i][j]);
         }
         printf("\n");
     }
@@ -55,22 +56,22 @@ void print_triangle(int** triangle, int numRows)
  */
 triangle *generate(triangle* my_tri, int num_rows) 
 {
-    int** triangle = xmalloc(num_rows * sizeof(int*));
+    int** tri_data = xcalloc(num_rows, sizeof(int*));
     
-    my_tri->data = triangle;
+    my_tri->data = tri_data;
     my_tri->size = num_rows;
     
     for (int i = 0; i < num_rows; i++) 
     {
-        triangle[i] = xmalloc((i) * sizeof(int)); 
-        triangle[i][0] = 1;  // first element of each row is always 1
+        tri_data[i] = xmalloc((i) * sizeof(int)); 
+        tri_data[i][0] = 1;  // first element of each row is always 1
 
         for (int j = 1; j < i; j++) 
         {
             // calculate each element of the current row
-            triangle[i][j] = triangle[i-1][j-1] + triangle[i-1][j];  
+            tri_data[i][j] = tri_data[i-1][j-1] + tri_data[i-1][j];  
         }
-        triangle[i][i] = 1;  // last element of each row is always 1
+        tri_data[i][i] = 1;  // last element of each row is always 1
     }
     return my_tri;
 }
