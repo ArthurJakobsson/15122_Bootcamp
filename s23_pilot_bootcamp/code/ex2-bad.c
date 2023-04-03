@@ -11,8 +11,7 @@
  * 15-122: Principles of Imperative Computation
  * Spring 2023 - Debugging in C Pilot Bootcamp
  *   
- * Based on solution of removing duplicates from
- * https://tinyurl.com/remove-dupes
+ * Loosely based on the game fizzbuzz. 
  * 
  * This is a BUGGY implementation.
  * 
@@ -20,133 +19,64 @@
  * @author Liz Chu <echu2@andrew.cmu.edu>
  */
 
-/** @brief struct of linked list node (containing int data & next pointer) */
-typedef struct list_node {
-    int data;
-    struct list_node* next;
-} node;
-
 /*
  * ---------------------------------------------------------------------------
  *                           SHORT HELPER FUNCTIONS
  * ---------------------------------------------------------------------------
  */
 
-/** 
- * @brief checks if list starting at node L is sorted 
- * THIS IS A CORRECT FUNCTION! 
+/**
+ * @brief checks if two arrays are equal by looking at each element
+ * THIS IS A CORRECT FUNCTION!
  */
-bool is_sorted(node* L)
+bool arrs_equal(int A[], int B[], int len_A, int len_B)
 {
-    node* curr = L;
-    node* next = L->next;
-    while (next != NULL)
+    if (len_A != len_B) return false;
+    for (int i = 0; i < len_A; i++)
     {
-        if (curr->data > next->data) return false;
-        curr = next;
-        next = next->next;
+        if (A[i] != B[i]) return false;
     }
     return true;
-}
-
-/** 
- * @brief checks if list starting at node L has duplicates
- * @pre list L has to be sorted
- * THIS IS A CORRECT FUNCTION! 
- */
-bool no_dupes(node* L)
-{
-    REQUIRES(is_sorted(L));
-
-    node* curr = L;
-    node* next = L->next;
-    while (next != NULL)
-    {
-        if (curr->data == next->data) return false;
-        curr = next;
-        next = next->next;
-    }
-    return true;
-}
-
-/** 
- * @brief helper function to free list
- * THIS IS A CORRECT FUNCTION! 
- */
-void free_list(node* L)
-{
-    while (L != NULL)
-    {
-        node* temp = L->next;
-        free(L);
-        L = temp;
-    }
-}
-
-/** 
- * @brief prints out the lsit starting at L for debugging purposes
- * TODO: IMPLEMENT ME TO HELP DEBUG
- */
-void print_list(node* L) 
-{
-    // IMPLEMENT ME!
 }
 
 /* ---------------------- END SHORT HELPER FUNCTIONS ----------------------- */
 
 /**
- * @brief removes duplicates from a sorted list starting at L
- * @pre list L must be sorted
- * TODO: fix the bug in this function
+ * @brief applys fizzedbuzzed rules onto given array A of length len
+ * @param A int array
+ * @param len of array
  */
-node* remove_duplicates(node* L)
+void fizzed_and_buzzed(int A[], int len)
 {
-    REQUIRES(is_sorted(L)); 
-    node* curr = L;
-    while (curr != NULL && curr->next != NULL)
+    for (int i = 0; i < len; i+=2)
     {
-        if (curr->next->data == curr->data)
+        if ((A[i] & 0x1) != 0)
         {
-            curr = curr->next; 
+            A[i] = 0;
         }
-        else
+        else if (A[i] % 7 == 0)
         {
-            curr->next = curr->next->next; 
+            A[i] = 1;
+        }
+        else if ((A[i] & 0x1) != 0 && (A[i] % 7 == 0))
+        {
+            A[i] = -1;
         }
     }
-    return L;
 }
 
 int main()
 {
-    node* L1 = malloc(sizeof(node));
-    L1->data = 3; 
-    L1->next = malloc(sizeof(node));
-    L1->next->data = 3;
-    L1->next->next = malloc(sizeof(node));
-    L1->next->next->data = 5; 
-    L1->next->next->next = malloc(sizeof(node));
-    L1->next->next->next->data = 7; 
-    L1->next->next->next->next = malloc(sizeof(node));
-    L1->next->next->next->next->data = 7; 
+    int A[10] = {4, 7, 2, 14, 28, 5, 7, 8, 10, 34};
+    fizzed_and_buzzed(A, 10); 
+    int A_res[10] = {4, 1, 2, -1, 28, 5, 7, 0, 10, 0};
+    assert(arrs_equal(A, A_res, 10, 10));
 
-    node* L2 = malloc(sizeof(node));
-    L2->data = 1; 
-    L2->next = malloc(sizeof(node));
-    L2->next->data = 1;
-    L2->next->next = malloc(sizeof(node));
-    L2->next->next->data = 1;
-
-    L1 = remove_duplicates(L1);
-    L2 = remove_duplicates(L2);
-    print_list(L1);
-    print_list(L2);
-    assert(is_sorted(L1) && no_dupes(L1));
-    assert(is_sorted(L2) && no_dupes(L2));
-
-    printf("All tests passed!\n");
-    free_list(L1);
-    free_list(L2);
-    while (L1 != NULL)
+    int B[7] = {7, 1, 0, 24, 6, 5, 12};
+    fizzed_and_buzzed(B, 7);
+    int B_res[7] = {7, 1, 0, 0, 6, 5, 12};
+    assert(arrs_equal(B, B_res, 7, 7));
+    
+    printf("All tests passed! \n");
     return 0;
 } 
