@@ -6,14 +6,14 @@
 #include "lib/contracts.h"
 
 /**
- * @file ex6-correct.c
+ * @file ex6-bad.c
  * @brief Example (6) demonstrating test cases and contracts (student)
  *
  * 15-122: Principles of Imperative Computation
  * Spring 2023 - Debugging in C Pilot Bootcamp
  *
  *
- * This is a CORRECT implementation.
+ * This is a BUGGY implementation.
  *
  * @author Arthur Jakobsson <ajakobss@andrew.cmu.edu>
  * @author Liz Chu <echu2@andrew.cmu.edu>
@@ -115,7 +115,7 @@ bool check_list(dna_node_t *start)
 
 
 /**
- * @brief
+ * @brief ONLY PROBLEMS IN HERE
  *
  * NO ALLOCATING IN HERE!
  *
@@ -125,15 +125,16 @@ bool check_list(dna_node_t *start)
  */
 dna_node_t *twist_my_dna(dna_node_t *first_strand, dna_node_t *second_strand)
 {
-  dna_node_t *start = first_strand; //change this from second to first
+  dna_node_t *start = second_strand;
   dna_node_t *first_curr = first_strand;
   dna_node_t *second_curr = second_strand;
-  while(first_curr!=NULL) //remove next
+  while(first_curr->next!=NULL) //where could I add contracts in here?
   {
+    printf("Current data: %c \n", first_curr->data);
     dna_node_t *temp_first_next = first_curr->next;
     first_curr->next = second_curr;
-    first_curr = second_curr; //add this line
     second_curr = temp_first_next;
+    //What should the next block in the chain be? what contract can I write
   }
   check_list(start);
   return start;
@@ -153,25 +154,11 @@ dna_node_t *twist_my_dna(dna_node_t *first_strand, dna_node_t *second_strand)
  */
 void test()
 {
-  char test1[] = "AAAA";
-  char correctOutput1[] = "ATATATAT";
+  char test1[] = "AT";
   dna_node_t * test_1_strand_1 = createStrand(test1, false);
   dna_node_t * test_1_strand_2 = createStrand(test1, true);
-  dna_node_t * test_1_correct_output = createStrand(correctOutput1, false);
   dna_node_t * twistedDNA1 = twist_my_dna(test_1_strand_1, test_1_strand_2);
-  assert(strandEqual(test_1_correct_output, twistedDNA1));
-  dna_free(test_1_correct_output);
   dna_free(twistedDNA1); //twisted should contain all the strand 1 and 2 nodes
-
-  char test2[] = "GGGG";
-  char correctOutput2[] = "GCGCGCGC";
-  dna_node_t * test_2_strand_1 = createStrand(test2, false);
-  dna_node_t * test_2_strand_2 = createStrand(test2, true);
-  dna_node_t * test_2_correct_output = createStrand(correctOutput2, false);
-  dna_node_t * twistedDNA2 = twist_my_dna(test_2_strand_1, test_2_strand_2);
-  assert(strandEqual(test_2_correct_output, twistedDNA2));
-  dna_free(test_2_correct_output);
-  dna_free(twistedDNA2);
 }
 
 /**

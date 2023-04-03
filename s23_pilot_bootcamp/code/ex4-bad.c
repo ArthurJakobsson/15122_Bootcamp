@@ -23,7 +23,7 @@
 
 /*
  * ---------------------------------------------------------------------------
- *                           SHORT HELPER FUNCTIONS
+ *                                 STRUCT
  * ---------------------------------------------------------------------------
  */
 
@@ -33,23 +33,26 @@ typedef struct triangle_header {
     long size;
 } triangle;
 
+/*
+ * ---------------------------------------------------------------------------
+ *                 SHORT HELPER FUNCTIONS (Defined in full below)
+ * ---------------------------------------------------------------------------
+ */
+
+
+
 /**
- * @brief prints out triangle, given number of rows
+ * @brief Forward definition, prints out triangle, given number of rows
  * THIS IS A CORRECT FUNCTION!
 */
-void print_triangle(int** tri, int numRows)
-{
-    for (int i = 0; i < numRows; i++)
-    {
-        for (int j = 0; j <= i; j++)
-        {
-            printf("%d ", tri[i][j]);
-        }
-        printf("\n");
-    }
-}
+void print_triangle(int** tri, int numRows);
 
-/* ---------------------- END SHORT HELPER FUNCTIONS ----------------------- */
+
+/*
+ * ---------------------------------------------------------------------------
+ *                                   BUGS!
+ * ---------------------------------------------------------------------------
+ */
 
 /**
  * @brief generates a pascal's triangle, given a struct and number of rows
@@ -97,4 +100,26 @@ int main()
     }
     free(my_triangle);
     return 0;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *                 DON'T WORRY ABOUT ANYTHING BELOW HERE
+ * ---------------------------------------------------------------------------
+ */
+
+/**
+ * @brief prints out triangle, given number of rows
+ * THIS IS A CORRECT FUNCTION!
+*/
+void print_triangle(int** tri, int numRows)
+{
+    for (int i = 0; i < numRows; i++)
+    {
+        for (int j = 0; j <= i; j++)
+        {
+            printf("%d ", tri[i][j]);
+        }
+        printf("\n");
+    }
 }
