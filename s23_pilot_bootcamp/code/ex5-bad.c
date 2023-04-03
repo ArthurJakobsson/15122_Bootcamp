@@ -11,7 +11,7 @@
  * Spring 2023 - Debugging in C Pilot Bootcamp
  *
  *
- * This is a Correct implementation.
+ * This is a BUGGY implementation.
  *
  * @author Arthur Jakobsson <ajakobss@andrew.cmu.edu>
  * @author Liz Chu <echu2@andrew.cmu.edu>
@@ -19,6 +19,32 @@
 
 
 typedef int pixel; //NOTE the lack of a star (not a pointer)
+
+
+/*
+ * ---------------------------------------------------------------------------
+ *                 SHORT HELPER FUNCTIONS (Defined in full below)
+ * ---------------------------------------------------------------------------
+ */
+
+/**
+ * @brief Don't worry about this, it's correct.
+ *
+ * @param a alpha value
+ * @param r red value
+ * @param g green value
+ * @param b blue value
+ * @return pixel pixel created
+ */
+pixel create_pixel(int a, int r, int g, int b);
+
+
+
+/*
+ * ---------------------------------------------------------------------------
+ *                                   BUGS!
+ * ---------------------------------------------------------------------------
+ */
 
 /**
  * RULES:
@@ -28,16 +54,11 @@ typedef int pixel; //NOTE the lack of a star (not a pointer)
  * - blue   remove top 4 bits
  */
 
-
-
 int new_alpha_in_position(pixel pix)
 {
   int mask = 0xFF;
   int alpha_val = ((int)pix>>24) & mask;
-  if(alpha_val==mask) //add this "if"
-  {
-    return alpha_val<<24;
-  }
+  //
   int result = (alpha_val + 1)<<24;
   return result;
 }
@@ -55,7 +76,7 @@ int new_green_in_position(pixel pix)
   int mask = 0xFF;
   int green_val = ((int)pix) & (mask<<8);
   //divide by two
-  return (green_val>>1) & (mask<<8); //add mask
+  return (green_val>>1);
 }
 
 int new_blue_in_position(pixel pix)
@@ -75,27 +96,27 @@ pixel remix_pixel(pixel pix)
   return a | r | g | b;
 }
 
-pixel create_pixel(int a, int r, int g, int b)
-{
-  return (pixel) (a<<24 | r<<16 | g << 8 | b);
-}
 
 void test()
 {
-  pixel test_1 = create_pixel(0xFF,0xFF,0xFF,0xFF);
-  assert((int) remix_pixel(test_1) == (int)0xFF0F7FF0); // should catch alpha
-
-  pixel test_2 = create_pixel(0x78, 0x78, 0x78, 0x78);
-  assert((int) remix_pixel(test_2) == (int)0x79083C70); //shouldn't catch anything
-
-  pixel test_3 = create_pixel(0x7F, 0x7F, 0x7F, 0x7F);
-  assert((int) remix_pixel(test_3) == (int)0x800F3F70); //should catch green
+  printf("bleh\n");
 }
 
 int main()
 {
   test();
   return 1;
-  //implement a pixel with garbled bytes
-  //phrase it as if we have fully running code but we don't pass autolab ;-;
+}
+
+
+/*
+ * ---------------------------------------------------------------------------
+ *                 DON'T WORRY ABOUT ANYTHING BELOW HERE
+ * ---------------------------------------------------------------------------
+ */
+
+
+pixel create_pixel(int a, int r, int g, int b)
+{
+  return (pixel) (a<<24 | r<<16 | g << 8 | b);
 }
