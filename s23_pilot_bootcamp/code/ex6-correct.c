@@ -315,3 +315,6 @@ dna_node_t *createStrand(char *str, bool flip)
   }
   return start;
 }
+
+
+
