@@ -4,7 +4,7 @@
 #include <assert.h>
 
 /**
- * @file ex1-bad.c
+ * @file ex1.c
  * @brief Example (1) demonstrating print statement debugging (TA step-through)
  *
  * 15-122: Principles of Imperative Computation
@@ -21,7 +21,8 @@
 
 /**
  * @brief computes nth term of the fibonacci sequence
- * TODO: fix the bug in this function
+ * @return nth fibonacci term
+ * TODO: fix the bugs in this function
  */
 int fib(int n)
 {
