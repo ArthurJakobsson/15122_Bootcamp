@@ -29,6 +29,19 @@ typedef int pixel; //NOTE the lack of a star (not a pointer)
  */
 
 
+/*
+ * ---------------------------------------------------------------------------
+ *                 SHORT HELPER FUNCTIONS (Defined in full below)
+ * ---------------------------------------------------------------------------
+ */
+pixel create_pixel(int a, int r, int g, int b);
+
+/*
+ * ---------------------------------------------------------------------------
+ *                                   BUGS!
+ * ---------------------------------------------------------------------------
+ */
+
 
 int new_alpha_in_position(pixel pix)
 {
@@ -75,10 +88,12 @@ pixel remix_pixel(pixel pix)
   return a | r | g | b;
 }
 
-pixel create_pixel(int a, int r, int g, int b)
-{
-  return (pixel) (a<<24 | r<<16 | g << 8 | b);
-}
+/*
+ * ---------------------------------------------------------------------------
+ *                                Test Cases
+ * ---------------------------------------------------------------------------
+ */
+
 
 void test()
 {
@@ -98,4 +113,15 @@ int main()
   return 1;
   //implement a pixel with garbled bytes
   //phrase it as if we have fully running code but we don't pass autolab ;-;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *                 DON'T WORRY ABOUT ANYTHING BELOW HERE
+ * ---------------------------------------------------------------------------
+ */
+
+pixel create_pixel(int a, int r, int g, int b)
+{
+  return (pixel) (a<<24 | r<<16 | g << 8 | b);
 }

@@ -67,7 +67,7 @@ triangle* generate(triangle *my_tri, int num_rows)
     for (int i = 0; i < num_rows; i++)
     {
         // change this to i+1 (triangle row is always one bigger)
-        tri_data[i] = xmalloc((i + 1) * sizeof(int)); // BUG 1 IS HERE
+        tri_data[i] = xmalloc((i + 1) * sizeof(int)); // BUG 1: should be i+1
         tri_data[i][0] = 1;  // first element of each row is always 1
 
         for (int j = 1; j < i; j++)

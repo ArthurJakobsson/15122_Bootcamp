@@ -10,14 +10,20 @@
  *
  * 15-122: Principles of Imperative Computation
  * Spring 2023 - Debugging in C Pilot Bootcamp
- *   
+ *
  * Based on solution of removing duplicates from
  * https://tinyurl.com/remove-dupes
- * 
+ *
  * This is a BUGGY implementation.
- * 
+ *
  * @author Arthur Jakobsson <ajakobss@andrew.cmu.edu>
  * @author Liz Chu <echu2@andrew.cmu.edu>
+ */
+
+/*
+ * ---------------------------------------------------------------------------
+ *                                 STRUCT
+ * ---------------------------------------------------------------------------
  */
 
 /** @brief struct of linked list node (containing int data & next pointer) */
@@ -28,75 +34,36 @@ typedef struct list_node {
 
 /*
  * ---------------------------------------------------------------------------
- *                           SHORT HELPER FUNCTIONS
+ *                 SHORT HELPER FUNCTIONS (Defined in full below)
  * ---------------------------------------------------------------------------
  */
 
-/** 
- * @brief checks if list starting at node L is sorted 
+/**
+ * @brief checks if list starting at node L is sorted
  */
-bool is_sorted(node* L)
-{
-    node* curr = L;
-    node* next = L->next;
-    while (next != NULL)
-    {
-        if (curr->data > next->data) return false;
-        curr = next;
-        next = next->next;
-    }
-    return true;
-}
+bool is_sorted(node* L);
 
-/** 
+/**
  * @brief checks if list starting at node L has duplicates
  * @pre list L has to be sorted
  */
-bool no_dupes(node* L)
-{
-    REQUIRES(is_sorted(L));
+bool no_dupes(node* L);
 
-    node* curr = L;
-    node* next = L->next;
-    while (next != NULL)
-    {
-        if (curr->data == next->data) return false;
-        curr = next;
-        next = next->next;
-    }
-    return true;
-}
-
-/** 
+/**
  * @brief helper function to free list
  */
-void free_list(node* L)
-{
-    node* temp;
-    while (L != NULL)
-    {
-        temp = L->next;
-        free(L);
-        L = temp;
-    }
+void free_list(node* L);
 
-}
-
-/** 
+/**
  * @brief prints out the list starting at L for debugging purposes
  */
-void print_list(node* L) 
-{
-    node* curr = L;
-    while (curr != NULL)
-    {
-        printf("%d --> ", curr->data);
-        curr = curr->next;
-    }
-    printf("NULL\n");
-}
+void print_list(node* L);
 
-/* ---------------------- END SHORT HELPER FUNCTIONS ----------------------- */
+/*
+ * ---------------------------------------------------------------------------
+ *                                   BUGS!
+ * ---------------------------------------------------------------------------
+ */
 
 /**
  * @brief removes duplicates from a sorted list starting at L
@@ -104,20 +71,20 @@ void print_list(node* L)
  */
 node* remove_duplicates(node* L)
 {
-    REQUIRES(is_sorted(L)); 
+    REQUIRES(is_sorted(L));
     node* curr = L;
     while (curr != NULL && curr->next != NULL)
     {
         if (curr->next->data == curr->data)
         {
             node* temp = curr->next;
-            curr->next = curr->next->next; 
+            curr->next = curr->next->next;
             free(temp);
         }
         else
         {
-            curr = curr->next; 
-            free(curr); 
+            curr = curr->next;
+            free(curr);
         }
     }
     return L;
@@ -126,18 +93,18 @@ node* remove_duplicates(node* L)
 int main()
 {
     node* L1 = calloc(sizeof(node), 1);
-    L1->data = 3; 
+    L1->data = 3;
     L1->next = calloc(sizeof(node), 1);
     L1->next->data = 3;
     L1->next->next = calloc(sizeof(node), 1);
-    L1->next->next->data = 5; 
+    L1->next->next->data = 5;
     L1->next->next->next = calloc(sizeof(node), 1);
-    L1->next->next->next->data = 7; 
+    L1->next->next->next->data = 7;
     L1->next->next->next->next = calloc(sizeof(node), 1);
-    L1->next->next->next->next->data = 7; 
+    L1->next->next->next->next->data = 7;
 
     node* L2 = calloc(sizeof(node), 1);
-    L2->data = 1; 
+    L2->data = 1;
     L2->next = calloc(sizeof(node), 1);
     L2->next->data = 1;
     L2->next->next = calloc(sizeof(node), 1);
@@ -157,4 +124,75 @@ int main()
 
     while (L1 != NULL)
     return 0;
-} 
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *                 DON'T WORRY ABOUT ANYTHING BELOW HERE
+ * ---------------------------------------------------------------------------
+ */
+
+
+/**
+ * @brief checks if list starting at node L is sorted
+ */
+bool is_sorted(node* L)
+{
+    node* curr = L;
+    node* next = L->next;
+    while (next != NULL)
+    {
+        if (curr->data > next->data) return false;
+        curr = next;
+        next = next->next;
+    }
+    return true;
+}
+
+/**
+ * @brief checks if list starting at node L has duplicates
+ * @pre list L has to be sorted
+ */
+bool no_dupes(node* L)
+{
+    REQUIRES(is_sorted(L));
+
+    node* curr = L;
+    node* next = L->next;
+    while (next != NULL)
+    {
+        if (curr->data == next->data) return false;
+        curr = next;
+        next = next->next;
+    }
+    return true;
+}
+
+/**
+ * @brief helper function to free list
+ */
+void free_list(node* L)
+{
+    node* temp;
+    while (L != NULL)
+    {
+        temp = L->next;
+        free(L);
+        L = temp;
+    }
+
+}
+
+/**
+ * @brief prints out the list starting at L for debugging purposes
+ */
+void print_list(node* L)
+{
+    node* curr = L;
+    while (curr != NULL)
+    {
+        printf("%d --> ", curr->data);
+        curr = curr->next;
+    }
+    printf("NULL\n");
+}
