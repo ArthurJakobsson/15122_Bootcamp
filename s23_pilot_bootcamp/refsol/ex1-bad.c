@@ -4,7 +4,7 @@
 #include <assert.h>
 
 /**
- * @file ex1-correct.c
+ * @file ex1-bad.c
  * @brief Example (1) demonstrating print statement debugging (TA step-through)
  *
  * 15-122: Principles of Imperative Computation
@@ -13,7 +13,7 @@
  * Based on printing Fibonacci sequence taken from
  * https://quescol.com/interview-preparation/fibonacci-series-in-c-program
  *
- * This is a CORRECT implementation.
+ * This is a BUGGY implementation.
  *
  * @author Liz Chu <echu2@andrew.cmu.edu>
  * @author Arthur Jakobsson <ajakobss@andrew.cmu.edu>
@@ -21,7 +21,8 @@
 
 /**
  * @brief computes nth term of the fibonacci sequence
- * TODO: fix the bug in this function
+ * @return nth fibonacci term
+ * TODO: fix the bugs in this function
  */
 int fib(int n)
 {
@@ -34,15 +35,11 @@ int fib(int n)
     for (int i = 1; i < n; i++)
     {
         result = first + second;
-        first = second; // this line is wrong in the buggy implementation
-        second = result; // this line is wrong in the buggy implementation
+        second = first;
+        first = result;
 
-        // (2) PRINT STATEMENT SHOULD CORRECTLY GO HERE
-        // printf("iter: %d, first: %d, second: %d, result: %d\n", i, first, second, result);
     }
 
-    // (1) FIRST INCORRECT PRINT STATEMENT GOES HERE
-    // printf("first: %d, second: %d, result: %d\n", first, second, result);
     return result;
 }
 

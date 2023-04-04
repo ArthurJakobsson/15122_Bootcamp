@@ -42,9 +42,8 @@ typedef struct triangle_header {
 /**
  * @brief Forward definition, prints out triangle, given number of rows
  * THIS IS A CORRECT FUNCTION!
- * Hint: use this!
 */
-void print_triangle(int** tri, int numRows);
+void print_triangle(int** tri, int num_rows);
 
 /*
  * ---------------------------------------------------------------------------
@@ -52,12 +51,14 @@ void print_triangle(int** tri, int numRows);
  * ---------------------------------------------------------------------------
  */
 
-
 /**
  * @brief generates a pascal's triangle, given a struct and number of rows
- * TODO: fix the bug in this function
+ * @param my_tri triangle to create
+ * @param num_rows number of rows in triangle 
+ * @return triangle generated 
+ * TODO: fix the bugs in this function
  */
-triangle* generate(triangle *my_tri, int num_rows)
+triangle *generate(triangle* my_tri, int num_rows)
 {
     int** tri_data = xcalloc(num_rows, sizeof(int*));
 
@@ -82,7 +83,7 @@ triangle* generate(triangle *my_tri, int num_rows)
 
 /**
  * @brief creates a pascal's triangle, prints it, and frees all alloc'ed memory
- * TODO: fix all the memory bugs in this function
+ * TODO: fix the bugs in this function
  */
 int main()
 {
@@ -103,7 +104,6 @@ int main()
     return 0;
 }
 
-
 /*
  * ---------------------------------------------------------------------------
  *                 DON'T WORRY ABOUT ANYTHING BELOW HERE
@@ -112,11 +112,13 @@ int main()
 
 /**
  * @brief prints out triangle, given number of rows
+ * @param tri 2d array representing triangle
+ * @param num_rows number of rows 
  * THIS IS A CORRECT FUNCTION!
 */
-void print_triangle(int** tri, int numRows)
+void print_triangle(int** tri, int num_rows)
 {
-    for (int i = 0; i < numRows; i++)
+    for (int i = 0; i < num_rows; i++)
     {
         for (int j = 0; j <= i; j++)
         {

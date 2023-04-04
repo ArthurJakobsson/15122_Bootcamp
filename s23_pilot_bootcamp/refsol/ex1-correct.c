@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <assert.h>
+
+/**
+ * @file ex1-correct.c
+ * @brief Example (1) demonstrating print statement debugging (TA step-through)
+ *
+ * 15-122: Principles of Imperative Computation
+ * Spring 2023 - Debugging in C Pilot Bootcamp
+ *
+ * Based on printing Fibonacci sequence taken from
+ * https://quescol.com/interview-preparation/fibonacci-series-in-c-program
+ *
+ * This is a CORRECT implementation.
+ *
+ * @author Liz Chu <echu2@andrew.cmu.edu>
+ * @author Arthur Jakobsson <ajakobss@andrew.cmu.edu>
+ */
+
+/**
+ * @brief computes nth term of the fibonacci sequence
+ * @return nth fibonacci term
+ * TODO: fix the bugs in this function
+ */
+int fib(int n)
+{
+    int first = 0;
+    int second = 1;
+    int result = 0;
+
+    if (n <= 1) return n;
+
+    for (int i = 1; i < n; i++)
+    {
+        result = first + second;
+        first = second; // BUG IS HERE
+        second = result; // BUG IS HERE
+        // (2) PRINT STATEMENT SHOULD CORRECTLY GO HERE
+        // printf("iter: %d, first: %d, second: %d, result: %d\n", 
+        //        i, first, second, result);
+    }
+    // (1) FIRST INCORRECT PRINT STATEMENT GOES HERE
+    // printf("first: %d, second: %d, result: %d\n", first, second, result);
+    return result;
+}
+
+int main()
+{
+    printf("Testing fib:\n");
+    assert(fib(0) == 0);
+    assert(fib(1) == 1);
+    assert(fib(2) == 1);
+    assert(fib(3) == 2);
+    assert(fib(4) == 3);
+    assert(fib(5) == 5);
+    assert(fib(6) == 8);
+    assert(fib(7) == 13);
+    assert(fib(8) == 21);
+    printf("All tests correct!\n");
+    return 0;
+}

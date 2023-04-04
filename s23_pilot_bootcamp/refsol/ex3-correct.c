@@ -2,10 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include "lib/xalloc.h"
 #include "lib/contracts.h"
 
 /**
- * @file ex3-bad.c
+ * @file ex3-correct.c
  * @brief Example (3) practicing valgrind debugging (TA step-through)
  *
  * 15-122: Principles of Imperative Computation
@@ -14,7 +15,7 @@
  * Based on solution of removing duplicates from
  * https://tinyurl.com/remove-dupes
  *
- * This is a BUGGY implementation.
+ * This is a CORRECT implementation.
  *
  * @author Arthur Jakobsson <ajakobss@andrew.cmu.edu>
  * @author Liz Chu <echu2@andrew.cmu.edu>
@@ -26,7 +27,10 @@
  * ---------------------------------------------------------------------------
  */
 
-/** @brief struct of linked list node (containing int data & next pointer) */
+/** 
+ * @brief struct of linked list node (containing int data & next pointer) 
+ * note: null-terminated lists
+ * */
 typedef struct list_node {
     int data;
     struct list_node* next;
@@ -40,22 +44,25 @@ typedef struct list_node {
 
 /**
  * @brief checks if list starting at node L is sorted
+ * THIS IS A CORRECT FUNCTION!
  */
 bool is_sorted(node* L);
 
 /**
  * @brief checks if list starting at node L has duplicates
- * @pre list L has to be sorted
+ * THIS IS A CORRECT FUNCTION!
  */
 bool no_dupes(node* L);
 
 /**
  * @brief helper function to free list
+ * THIS IS A CORRECT FUNCTION!
  */
 void free_list(node* L);
 
 /**
  * @brief prints out the list starting at L for debugging purposes
+ * THIS IS A CORRECT FUNCTION!
  */
 void print_list(node* L);
 
@@ -68,6 +75,7 @@ void print_list(node* L);
 /**
  * @brief removes duplicates from a sorted list starting at L
  * @pre list L must be sorted
+ * TODO: fix the bugs in this function
  */
 node* remove_duplicates(node* L)
 {
@@ -84,12 +92,13 @@ node* remove_duplicates(node* L)
         else
         {
             curr = curr->next;
-            free(curr);
+            // free(curr); <-- REMOVE THIS LINE
         }
     }
     return L;
 }
 
+// TODO: fix the bugs in this function
 int main()
 {
     node* L1 = calloc(sizeof(node), 1);
@@ -120,9 +129,8 @@ int main()
     printf("All tests passed!\n");
     free_list(L1);
     free_list(L2);
-    L2->next = NULL;
+    // L2->next = NULL; <-- REMOVE THIS LINE
 
-    while (L1 != NULL)
     return 0;
 }
 
@@ -132,9 +140,10 @@ int main()
  * ---------------------------------------------------------------------------
  */
 
-
 /**
  * @brief checks if list starting at node L is sorted
+ * @param L start node of list
+ * THIS IS A CORRECT FUNCTION
  */
 bool is_sorted(node* L)
 {
@@ -151,7 +160,9 @@ bool is_sorted(node* L)
 
 /**
  * @brief checks if list starting at node L has duplicates
+ * @param L start node of list
  * @pre list L has to be sorted
+ * THIS IS A CORRECT FUNCTION
  */
 bool no_dupes(node* L)
 {
@@ -170,6 +181,8 @@ bool no_dupes(node* L)
 
 /**
  * @brief helper function to free list
+ * @param L start node of list
+ * THIS IS A CORRECT FUNCTION
  */
 void free_list(node* L)
 {
@@ -185,6 +198,8 @@ void free_list(node* L)
 
 /**
  * @brief prints out the list starting at L for debugging purposes
+ * @param L start node of list
+ * THIS IS A CORRECT FUNCTION
  */
 void print_list(node* L)
 {

@@ -50,7 +50,7 @@ static void printList(chonky *node) {
  */
 void printGoose(chonky *honk) {
     //name and address
-    printf("\tName: %s, Current Address %p\n", honk->name, (void *)honk);
+    printf("\tName: %s, Address %p\n", honk->name, (void *)honk);
     //integer
     printf("\t\tHeight: %d inches\n", honk->height);
     //category
@@ -70,8 +70,8 @@ void printGoose(chonky *honk) {
         printf("no color\n");
     }
     //boolean
-    honk->canadian ? printf("\t\t\tfrom Canada\n")
-                : printf("\t\t\tnot from Canada\n");
+    honk->canadian ? printf("\t\tFrom: Canada\n")
+                : printf("\t\tFrom: not Canada\n");
     //linked list
     printList(honk->next_chonk_friend);
 }
@@ -79,23 +79,24 @@ void printGoose(chonky *honk) {
 int main()
 {
   chonky *example = xcalloc(sizeof(chonky), 1);
-  strcpy(example->name, "Benjamin");
+  example->name = "Kevin";
   example->height = 13;
   example->color = 3;
   example->canadian = true;
 
   //friends
   chonky *f1 = xcalloc(sizeof(chonky), 1);
-  strcpy(f1->name, "Allen");
+  f1->name = "Allen";
   chonky *f2 = xcalloc(sizeof(chonky), 1);
-  strcpy(f2->name, "Jeffrey");
+  f2->name = "Jeffrey";
   chonky *f3 = xcalloc(sizeof(chonky), 1);
-  strcpy(f3->name, "Andy");
+  f3->name = "Alex";
 
   example->next_chonk_friend = f1;
   f1->next_chonk_friend = f2;
   f2->next_chonk_friend = f3;
   f3->next_chonk_friend = NULL;
+  printGoose(example);
   return 0;
 }
 
