@@ -18,7 +18,7 @@ Compiling example 3
 
 Compiling example 4
    % gcc -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex4.c -o ex4
-   % ./ex4
+   % valgrind ./ex4
 
 Compiling example 5 
    % gcc -DDEBUG -fsanitize=undefined -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex5.c -o ex5
