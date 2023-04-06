@@ -33,7 +33,7 @@
  * */
 typedef struct list_node {
     int data;
-    struct list_node* next;
+    struct list_node *next;
 } node;
 
 /*
@@ -46,25 +46,25 @@ typedef struct list_node {
  * @brief checks if list starting at node L is sorted
  * THIS IS A CORRECT FUNCTION!
  */
-bool is_sorted(node* L);
+bool is_sorted(node *L);
 
 /**
  * @brief checks if list starting at node L has duplicates
  * THIS IS A CORRECT FUNCTION!
  */
-bool no_dupes(node* L);
+bool no_dupes(node *L);
 
 /**
  * @brief helper function to free list
  * THIS IS A CORRECT FUNCTION!
  */
-void free_list(node* L);
+void free_list(node *L);
 
 /**
  * @brief prints out the list starting at L for debugging purposes
  * THIS IS A CORRECT FUNCTION!
  */
-void print_list(node* L);
+void print_list(node *L);
 
 /*
  * ---------------------------------------------------------------------------
@@ -77,15 +77,15 @@ void print_list(node* L);
  * @pre list L must be sorted
  * TODO: fix the bugs in this function
  */
-node* remove_duplicates(node* L)
+node *remove_duplicates(node *L)
 {
     REQUIRES(is_sorted(L));
-    node* curr = L;
+    node *curr = L;
     while (curr != NULL && curr->next != NULL)
     {
         if (curr->next->data == curr->data)
         {
-            node* temp = curr->next;
+            node *temp = curr->next;
             curr->next = curr->next->next;
             free(temp);
         }
@@ -101,7 +101,7 @@ node* remove_duplicates(node* L)
 // TODO: fix the bugs in this function
 int main()
 {
-    node* L1 = calloc(sizeof(node), 1);
+    node *L1 = calloc(sizeof(node), 1);
     L1->data = 3;
     L1->next = calloc(sizeof(node), 1);
     L1->next->data = 3;
@@ -112,7 +112,7 @@ int main()
     L1->next->next->next->next = calloc(sizeof(node), 1);
     L1->next->next->next->next->data = 7;
 
-    node* L2 = calloc(sizeof(node), 1);
+    node *L2 = calloc(sizeof(node), 1);
     L2->data = 1;
     L2->next = calloc(sizeof(node), 1);
     L2->next->data = 1;
@@ -145,10 +145,10 @@ int main()
  * @param L start node of list
  * THIS IS A CORRECT FUNCTION
  */
-bool is_sorted(node* L)
+bool is_sorted(node *L)
 {
-    node* curr = L;
-    node* next = L->next;
+    node *curr = L;
+    node *next = L->next;
     while (next != NULL)
     {
         if (curr->data > next->data) return false;
@@ -164,12 +164,12 @@ bool is_sorted(node* L)
  * @pre list L has to be sorted
  * THIS IS A CORRECT FUNCTION
  */
-bool no_dupes(node* L)
+bool no_dupes(node *L)
 {
     REQUIRES(is_sorted(L));
 
-    node* curr = L;
-    node* next = L->next;
+    node *curr = L;
+    node *next = L->next;
     while (next != NULL)
     {
         if (curr->data == next->data) return false;
@@ -184,9 +184,9 @@ bool no_dupes(node* L)
  * @param L start node of list
  * THIS IS A CORRECT FUNCTION
  */
-void free_list(node* L)
+void free_list(node *L)
 {
-    node* temp;
+    node *temp;
     while (L != NULL)
     {
         temp = L->next;
@@ -201,9 +201,9 @@ void free_list(node* L)
  * @param L start node of list
  * THIS IS A CORRECT FUNCTION
  */
-void print_list(node* L)
+void print_list(node *L)
 {
-    node* curr = L;
+    node *curr = L;
     while (curr != NULL)
     {
         printf("%d --> ", curr->data);

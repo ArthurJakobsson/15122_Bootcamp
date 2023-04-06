@@ -161,5 +161,5 @@ int main()
  */
 pixel create_pixel(int a, int r, int g, int b)
 {
-    return (pixel) (a<<24 | r<<16 | g << 8 | b);
+    return (pixel) (a << 24 | r << 16 | g << 8 | b);
 }

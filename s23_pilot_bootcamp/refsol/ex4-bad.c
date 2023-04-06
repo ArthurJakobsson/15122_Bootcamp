@@ -6,7 +6,7 @@
 #include "lib/xalloc.h"
 
 /**
- * @file ex4-bad.c
+ * @file ex4.c
  * @brief Example (4) practicing valgrind debugging (student)
  *
  * 15-122: Principles of Imperative Computation
@@ -29,7 +29,7 @@
 
 /** @brief struct of triangle node (containing int array data & size)*/
 typedef struct triangle_header {
-    int** data;
+    int **data;
     long size;
 } triangle;
 
@@ -43,7 +43,7 @@ typedef struct triangle_header {
  * @brief Forward definition, prints out triangle, given number of rows
  * THIS IS A CORRECT FUNCTION!
 */
-void print_triangle(int** tri, int num_rows);
+void print_triangle(int **tri, int num_rows);
 
 /*
  * ---------------------------------------------------------------------------
@@ -54,20 +54,20 @@ void print_triangle(int** tri, int num_rows);
 /**
  * @brief generates a pascal's triangle, given a struct and number of rows
  * @param my_tri triangle to create
- * @param num_rows number of rows in triangle 
- * @return triangle generated 
+ * @param num_rows number of rows in triangle
+ * @return triangle generated
  * TODO: fix the bugs in this function
  */
-triangle *generate(triangle* my_tri, int num_rows)
+triangle *generate(triangle *my_tri, int num_rows)
 {
-    int** tri_data = xcalloc(num_rows, sizeof(int*));
+    int **tri_data = xcalloc(num_rows, sizeof(int*));
 
     my_tri->data = tri_data;
     my_tri->size = num_rows;
 
     for (int i = 0; i < num_rows; i++)
     {
-        tri_data[i] = xmalloc((i) * sizeof(int));
+        tri_data[i] = xmalloc(i * sizeof(int));
         tri_data[i][0] = 1;  // first element of each row is always 1
 
         for (int j = 1; j < i; j++)
@@ -88,7 +88,7 @@ int main()
 {
     int num_rows = 7;
 
-    triangle* my_triangle = xmalloc(sizeof(triangle));
+    triangle *my_triangle = xmalloc(sizeof(triangle));
 
     my_triangle = generate(my_triangle, num_rows);
     print_triangle(my_triangle->data, num_rows); // just prints the triangle
@@ -111,10 +111,10 @@ int main()
 /**
  * @brief prints out triangle, given number of rows
  * @param tri 2d array representing triangle
- * @param num_rows number of rows 
+ * @param num_rows number of rows
  * THIS IS A CORRECT FUNCTION!
 */
-void print_triangle(int** tri, int num_rows)
+void print_triangle(int **tri, int num_rows)
 {
     for (int i = 0; i < num_rows; i++)
     {

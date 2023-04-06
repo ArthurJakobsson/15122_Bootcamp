@@ -5,7 +5,7 @@
 #include "lib/contracts.h"
 
 /**
- * @file ex5-bad.c
+ * @file ex5.c
  * @brief Example (5) demonstrating contracts and test cases (TA example)
  *
  * 15-122: Principles of Imperative Computation
@@ -148,5 +148,5 @@ int main()
  */
 pixel create_pixel(int a, int r, int g, int b)
 {
-    return (pixel) (a<<24 | r<<16 | g << 8 | b);
+    return (pixel) (a << 24 | r << 16 | g << 8 | b);
 }
