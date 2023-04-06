@@ -29,7 +29,7 @@
 
 /** @brief struct of triangle node (containing int array data & size)*/
 typedef struct triangle_header {
-    int** data;
+    int **data;
     long size;
 } triangle;
 
@@ -43,7 +43,7 @@ typedef struct triangle_header {
  * @brief Forward definition, prints out triangle, given number of rows
  * THIS IS A CORRECT FUNCTION!
 */
-void print_triangle(int** tri, int num_rows);
+void print_triangle(int **tri, int num_rows);
 
 /*
  * ---------------------------------------------------------------------------
@@ -58,9 +58,9 @@ void print_triangle(int** tri, int num_rows);
  * @return triangle generated 
  * TODO: fix the bugs in this function
  */
-triangle *generate(triangle* my_tri, int num_rows)
+triangle *generate(triangle *my_tri, int num_rows)
 {
-    int** tri_data = xcalloc(num_rows, sizeof(int*));
+    int **tri_data = xcalloc(num_rows, sizeof(int*));
 
     my_tri->data = tri_data;
     my_tri->size = num_rows;
@@ -89,7 +89,7 @@ int main()
 {
     int num_rows = 7;
 
-    triangle* my_triangle = xmalloc(sizeof(triangle));
+    triangle *my_triangle = xmalloc(sizeof(triangle));
 
     my_triangle = generate(my_triangle, num_rows);
     print_triangle(my_triangle->data, num_rows); // just prints the triangle
@@ -116,7 +116,7 @@ int main()
  * @param num_rows number of rows 
  * THIS IS A CORRECT FUNCTION!
 */
-void print_triangle(int** tri, int num_rows)
+void print_triangle(int **tri, int num_rows)
 {
     for (int i = 0; i < num_rows; i++)
     {
