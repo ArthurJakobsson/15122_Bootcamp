@@ -24,8 +24,8 @@
  * ---------------------------------------------------------------------------
  */
 
-/** 
- * @brief struct of linked list node (containing int data & next pointer) 
+/**
+ * @brief struct of linked list node (containing int data & next pointer)
  * note: null-terminated lists
  * */
 typedef struct dna_node {
@@ -39,7 +39,7 @@ typedef struct dna_node {
  * ---------------------------------------------------------------------------
  */
 
-/** 
+/**
  * @brief frees strand from start
  * THIS IS A CORRECT FUNCTION
  */
@@ -79,7 +79,7 @@ char get_opposite_dna(char content);
 /**
  * @brief checks integrity of linked list (currently prints)
  * @param start of DNA list
- * @return whether list is valid 
+ * @return whether list is valid
  * TODO: write contracts for this function
  */
 bool check_list(dna_node_t *start)
@@ -87,9 +87,20 @@ bool check_list(dna_node_t *start)
     dna_node_t *curr = start;
     while (curr != NULL)
     {
-        printf("data : %c\n", curr->data);
-        printf("pointer: %p \n", (void*)curr);
-        curr = curr->next;
+        // Should have an even number of data
+        ASSERT(curr->next != NULL);
+
+        dna_node_t *first = curr;
+        dna_node_t *second = curr->next;
+
+        printf("1st data : %c\n", first->data);
+        printf("1st pointer: %p \n", (void*)first);
+
+        printf("1st data : %c\n", second->data);
+        printf("1st pointer: %p \n", (void*)second);
+
+        ASSERT(get_opposite_dna(first->data) == second->data);
+        curr = curr->next->next;
     }
     printf("\n");
     return true;
@@ -105,7 +116,7 @@ bool check_list(dna_node_t *start)
  * @brief creates twisted DNA strand based on two individual DNA strands *
  * @param first_strand to twist
  * @param second_strand to twist
- * @return twisted DNA strand that combines first and second 
+ * @return twisted DNA strand that combines first and second
  * TODO: fix the bugs in this function
  */
 dna_node_t *twist_my_dna(dna_node_t *first_strand, dna_node_t *second_strand)
@@ -116,14 +127,20 @@ dna_node_t *twist_my_dna(dna_node_t *first_strand, dna_node_t *second_strand)
 
     while (first_curr != NULL) // remove next
     {
-        printf("current data: %c \n", first_curr->data);
+        printf("first data: %c \n", first_curr->data);
+        printf("second data: %c \n", second_curr->data);
+        ASSERT(get_opposite_dna(first_curr->data) == second_curr->data);
+
         dna_node_t *temp_first_next = first_curr->next;
+        dna_node_t *temp_second_next = second_curr->next;
         first_curr->next = second_curr;
-        first_curr = second_curr; // add this line
-        second_curr = temp_first_next;
-        // what should the next block in the chain be? what contract can I write
+        second_curr->next = temp_first_next;
+
+        first_curr = temp_first_next;
+        second_curr = temp_second_next;
     }
 
+    ASSERT(first_curr == NULL && second_curr == NULL);
     check_list(start);
     return start;
 }
@@ -143,8 +160,38 @@ void test()
     dna_node_t * test_1_strand_1 = create_strand(test1, false);
     dna_node_t * test_1_strand_2 = create_strand(test1, true);
     dna_node_t * twisted_dna_1 = twist_my_dna(test_1_strand_1, test_1_strand_2);
-    dna_free(twisted_dna_1); 
+    dna_free(twisted_dna_1);
     //twisted should contain all the strand 1 and 2 nodes
+
+    char test2[] = "AAAA";
+    char correctOutput2[] = "ATATATAT";
+    dna_node_t * test_2_strand_1 = create_strand(test2, false);
+    dna_node_t * test_2_strand_2 = create_strand(test2, true);
+    dna_node_t * test_2_correct_output = create_strand(correctOutput2, false);
+    dna_node_t * twistedDNA2 = twist_my_dna(test_2_strand_1, test_2_strand_2);
+    ASSERT(strand_equal(test_2_correct_output, twistedDNA2));
+    dna_free(test_2_correct_output);
+    dna_free(twistedDNA2); //twisted should contain all the strand 1 and 2 nodes
+
+    char test3[] = "TCGA";
+    char correctOutput3[] = "TACGGCAT";
+    dna_node_t * test_3_strand_1 = create_strand(test3, false);
+    dna_node_t * test_3_strand_2 = create_strand(test3, true);
+    dna_node_t * test_3_correct_output = create_strand(correctOutput3, false);
+    dna_node_t * twistedDNA3 = twist_my_dna(test_3_strand_1, test_3_strand_2);
+    ASSERT(strand_equal(test_3_correct_output, twistedDNA3));
+    dna_free(test_3_correct_output);
+    dna_free(twistedDNA3);
+
+    char test4[] = "";
+    char correctOutput4[] = "";
+    dna_node_t * test_4_strand_1 = create_strand(test4, false);
+    dna_node_t * test_4_strand_2 = create_strand(test4, true);
+    dna_node_t * test_4_correct_output = create_strand(correctOutput4, false);
+    dna_node_t * twistedDNA4 = twist_my_dna(test_4_strand_1, test_4_strand_2);
+    ASSERT(strand_equal(test_4_correct_output, twistedDNA4));
+    dna_free(test_4_correct_output);
+    dna_free(twistedDNA4);
 }
 
 int main()
@@ -159,7 +206,7 @@ int main()
  * ---------------------------------------------------------------------------
  */
 
-/** 
+/**
  * @brief frees strand from start
  * @param start of dna strand
  * THIS IS A CORRECT FUNCTION
@@ -265,8 +312,8 @@ dna_node_t *create_strand(char *str, bool flip)
         if (!flip)
         {
             input = str[i];
-        } 
-        else 
+        }
+        else
         {
             input = get_opposite_dna(str[i]);
         }
@@ -275,8 +322,8 @@ dna_node_t *create_strand(char *str, bool flip)
         {
             start = create_node(input);
             curr = start;
-        } 
-        else 
+        }
+        else
         {
             curr->next = create_node(input);
             curr = curr->next;
