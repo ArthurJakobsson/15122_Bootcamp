@@ -54,8 +54,8 @@ void print_triangle(int** tri, int num_rows);
 /**
  * @brief generates a pascal's triangle, given a struct and number of rows
  * @param my_tri triangle to create
- * @param num_rows number of rows in triangle 
- * @return triangle generated 
+ * @param num_rows number of rows in triangle
+ * @return triangle generated
  * TODO: fix the bugs in this function
  */
 triangle *generate(triangle* my_tri, int num_rows)
@@ -67,7 +67,7 @@ triangle *generate(triangle* my_tri, int num_rows)
 
     for (int i = 0; i < num_rows; i++)
     {
-        tri_data[i] = xmalloc((i) * sizeof(int));
+        tri_data[i] = xmalloc(i * sizeof(int));
         tri_data[i][0] = 1;  // first element of each row is always 1
 
         for (int j = 1; j < i; j++)
@@ -111,7 +111,7 @@ int main()
 /**
  * @brief prints out triangle, given number of rows
  * @param tri 2d array representing triangle
- * @param num_rows number of rows 
+ * @param num_rows number of rows
  * THIS IS A CORRECT FUNCTION!
 */
 void print_triangle(int** tri, int num_rows)
