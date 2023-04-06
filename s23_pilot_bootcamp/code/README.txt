@@ -13,11 +13,11 @@ Compiling example 2
    % ./ex2
 
 Compiling example 3 
-   % gcc -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex3.c -o ex3
+   % gcc -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex3.c -o ex3
    % ./ex3
 
 Compiling example 4
-   % gcc -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex4.c -o ex4
+   % gcc -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex4.c -o ex4
    % valgrind ./ex4
 
 Compiling example 5 
