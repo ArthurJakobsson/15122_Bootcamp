@@ -24,8 +24,8 @@
  * ---------------------------------------------------------------------------
  */
 
-/** 
- * @brief struct of linked list node (containing int data & next pointer) 
+/**
+ * @brief struct of linked list node (containing int data & next pointer)
  * note: null-terminated lists
  * */
 typedef struct dna_node {
@@ -39,7 +39,7 @@ typedef struct dna_node {
  * ---------------------------------------------------------------------------
  */
 
-/** 
+/**
  * @brief frees strand from start
  * THIS IS A CORRECT FUNCTION
  */
@@ -79,7 +79,7 @@ char get_opposite_dna(char content);
 /**
  * @brief checks integrity of linked list (currently prints)
  * @param start of DNA list
- * @return whether list is valid 
+ * @return whether list is valid
  * TODO: write contracts for this function
  */
 bool check_list(dna_node_t *start)
@@ -105,7 +105,7 @@ bool check_list(dna_node_t *start)
  * @brief creates twisted DNA strand based on two individual DNA strands *
  * @param first_strand to twist
  * @param second_strand to twist
- * @return twisted DNA strand that combines first and second 
+ * @return twisted DNA strand that combines first and second
  * TODO: fix the bugs in this function
  */
 dna_node_t *twist_my_dna(dna_node_t *first_strand, dna_node_t *second_strand)
@@ -119,7 +119,7 @@ dna_node_t *twist_my_dna(dna_node_t *first_strand, dna_node_t *second_strand)
         printf("current data: %c \n", first_curr->data);
         dna_node_t *temp_first_next = first_curr->next;
         first_curr->next = second_curr;
-        
+
         second_curr = temp_first_next;
         // what should the next block in the chain be? what contract can I write
     }
@@ -139,11 +139,11 @@ dna_node_t *twist_my_dna(dna_node_t *first_strand, dna_node_t *second_strand)
  */
 void test()
 {
-    char test1[] = "AT";
+    char test1[] = "AA";
     dna_node_t * test_1_strand_1 = create_strand(test1, false);
     dna_node_t * test_1_strand_2 = create_strand(test1, true);
     dna_node_t * twisted_dna_1 = twist_my_dna(test_1_strand_1, test_1_strand_2);
-    dna_free(twisted_dna_1); 
+    dna_free(twisted_dna_1);
     //twisted should contain all the strand 1 and 2 nodes
 }
 
@@ -159,7 +159,7 @@ int main()
  * ---------------------------------------------------------------------------
  */
 
-/** 
+/**
  * @brief frees strand from start
  * @param start of dna strand
  * THIS IS A CORRECT FUNCTION
@@ -265,8 +265,8 @@ dna_node_t *create_strand(char *str, bool flip)
         if (!flip)
         {
             input = str[i];
-        } 
-        else 
+        }
+        else
         {
             input = get_opposite_dna(str[i]);
         }
@@ -275,8 +275,8 @@ dna_node_t *create_strand(char *str, bool flip)
         {
             start = create_node(input);
             curr = start;
-        } 
-        else 
+        }
+        else
         {
             curr->next = create_node(input);
             curr = curr->next;

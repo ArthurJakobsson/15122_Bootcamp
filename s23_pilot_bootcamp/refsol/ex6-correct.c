@@ -59,6 +59,12 @@ dna_node_t *create_node(char content);
 
 /**
  * @brief create a strand object from a string
+ *
+ * str represents the DNA string to create.
+ * FLIP represents whether to create the exact string or the opposite string
+ * ex: str = "ATGC", flip = false; output: A->T->G->C
+ * ex2: str = "ATGC", flip = true; output: T->A->C->G
+ *
  * THIS IS A CORRECT FUNCTION
  */
 dna_node_t *create_strand(char *str, bool flip);
@@ -156,7 +162,7 @@ dna_node_t *twist_my_dna(dna_node_t *first_strand, dna_node_t *second_strand)
  */
 void test()
 {
-    char test1[] = "AT";
+    char test1[] = "AA";
     dna_node_t * test_1_strand_1 = create_strand(test1, false);
     dna_node_t * test_1_strand_2 = create_strand(test1, true);
     dna_node_t * twisted_dna_1 = twist_my_dna(test_1_strand_1, test_1_strand_2);
