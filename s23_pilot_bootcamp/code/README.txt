@@ -27,3 +27,7 @@ Compiling example 5
 Compiling example 6 
    % gcc -DDEBUG -fsanitize=undefined -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex6.c -o ex6
    % ./ex6
+
+Compiling print struct 
+   % gcc -DDEBUG -fsanitize=undefined -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic print-struct.c -o print-struct
+   % ./print-struct
