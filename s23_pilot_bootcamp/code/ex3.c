@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "lib/xalloc.h"
 #include "lib/contracts.h"
+#include "lib/ex3-helper.h"
 
 /**
  * ex3.c
@@ -30,15 +31,17 @@
 /** 
  * struct of linked list node (containing int data & next pointer) 
  * note: null-terminated lists
+ * note: defined in header file
  * */
-typedef struct list_node {
-    int data;
-    struct list_node *next;
-} node;
+
+// typedef struct list_node {
+//     int data;
+//     struct list_node *next;
+// } node;
 
 /*
  * ---------------------------------------------------------------------------
- *                 SHORT HELPER FUNCTIONS (Defined in full below)
+ *                          SHORT HELPER FUNCTIONS
  * ---------------------------------------------------------------------------
  */
 
@@ -137,82 +140,4 @@ int main()
     L2->next = NULL;
 
     return 0;
-}
-
-/*
- * ---------------------------------------------------------------------------
- *                 DON'T WORRY ABOUT ANYTHING BELOW HERE
- * ---------------------------------------------------------------------------
- */
-
-/**
- * this function checks if list starting at node L is sorted
- * takes in: L - start node of list
- * THIS IS A CORRECT FUNCTION
- */
-bool is_sorted(node *L)
-{
-    node *curr = L;
-    node *next = L->next;
-    while (next != NULL)
-    {
-        if (curr->data > next->data) return false;
-        curr = next;
-        next = next->next;
-    }
-    return true;
-}
-
-/**
- * this function checks if list starting at node L has duplicates
- * takes in: L - start node of list
- * precondition: list L has to be sorted
- * THIS IS A CORRECT FUNCTION
- */
-bool no_dupes(node *L)
-{
-    REQUIRES(is_sorted(L));
-
-    node *curr = L;
-    node *next = L->next;
-    while (next != NULL)
-    {
-        if (curr->data == next->data) return false;
-        curr = next;
-        next = next->next;
-    }
-    return true;
-}
-
-/**
- * this is a helper function to free list
- * takes in: L - start node of list
- * THIS IS A CORRECT FUNCTION
- */
-void free_list(node *L)
-{
-    node *temp;
-    while (L != NULL)
-    {
-        temp = L->next;
-        free(L);
-        L = temp;
-    }
-
-}
-
-/**
- * this function prints out the list starting at L for debugging purposes
- * takes in: L - start node of list
- * THIS IS A CORRECT FUNCTION
- */
-void print_list(node *L)
-{
-    node *curr = L;
-    while (curr != NULL)
-    {
-        printf("%d --> ", curr->data);
-        curr = curr->next;
-    }
-    printf("NULL\n");
 }

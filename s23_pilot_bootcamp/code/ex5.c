@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "lib/contracts.h"
+#include "lib/ex5-helper.h"
 
 /**
  * ex5.c
@@ -17,11 +18,12 @@
  * @author Liz Chu <echu2@andrew.cmu.edu>
  */
 
-typedef int pixel; // NOTE the lack of a star (not a pointer)
+// typedef int pixel; // NOTE the lack of a star (not a pointer)
+// note: defined in header file
 
 /*
  * ---------------------------------------------------------------------------
- *                 SHORT HELPER FUNCTIONS (Defined in full below)
+ *                          SHORT HELPER FUNCTIONS
  * ---------------------------------------------------------------------------
  */
 
@@ -44,7 +46,7 @@ pixel create_pixel(int a, int r, int g, int b);
  * - alpha: add 1 unless it is max (max = 0xFF)
  * - red:   remove bottom 4 bits
  * - green: divide by two
- * - blue   remove top 4 bits
+ * - blue:  remove top 4 bits
  */
 
 /** 
@@ -132,21 +134,4 @@ int main()
 {
     test();
     return 0;
-}
-
-/*
- * ---------------------------------------------------------------------------
- *                 DON'T WORRY ABOUT ANYTHING BELOW HERE
- * ---------------------------------------------------------------------------
- */
-
-/** 
- * this function creates a pixel based on given argb values
- * takes in: a - alpha value; red - red value; g - green value; b - blue value
- * returns: pixel created
- * THIS IS A CORRECT FUNCTION
- */
-pixel create_pixel(int a, int r, int g, int b)
-{
-    return (pixel) (a << 24 | r << 16 | g << 8 | b);
 }

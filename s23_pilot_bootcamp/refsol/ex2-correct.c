@@ -89,19 +89,19 @@ int main()
     A[6] = 7;
     A[7] = 8;
 
-    fizzed_and_buzzed(A, 10);
+    fizzed_and_buzzed(A, 8);
 
     int *A_res = xcalloc(sizeof(int), 8); 
     A_res[0] = 4;
-    A_res[1] = 7;
+    A_res[1] = 1;
     A_res[2] = 2;
-    A_res[3] = 14;
+    A_res[3] = -1;
     A_res[4] = 28;
     A_res[5] = 5;
     A_res[6] = 7;
-    A_res[7] = 8;
+    A_res[7] = 0;
     
-    assert(arrs_equal(A, A_res, 10, 10));
+    assert(arrs_equal(A, A_res, 8, 8));
 
     int *B = xcalloc(sizeof(int), 7); 
     B[0] = 7;

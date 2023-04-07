@@ -32,20 +32,20 @@ Compiling example 3 (buggy)
 
 
  Compiling example 4 (correct) // TA FACING! EXCLUDE IN HANDOUT
-   % gcc -w -std=c99 -pedantic ex4.c -g -o ex4
+   % gcc -w -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex4-correct.c -g -o ex4-correct
    % valgrind ./ex4-correct
 
 Compiling example 4 (buggy)
-   % gcc -w -std=c99 -pedantic ex4.c -g -o ex4
+   % gcc -w -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex4-bad.c -g -o ex4-bad
    % valgrind ./ex4-bad
 
 
  Compiling example 5 (correct) // TA FACING! EXCLUDE IN HANDOUT
-   % gcc -DDEBUG -fsanitize=undefined -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex5-correct.c -o ex5-correct
+   % gcc -DDEBUG -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex5-correct.c -o ex5-correct
    % ./ex5-correct
 
 Compiling example 5 (buggy)
-   % gcc -DDEBUG -fsanitize=undefined -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex5-bad.c -o ex5-bad
+   % gcc -DDEBUG -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex5-bad.c -o ex5-bad
    % ./ex5-bad
 
 

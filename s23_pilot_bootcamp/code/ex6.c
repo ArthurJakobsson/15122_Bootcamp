@@ -4,6 +4,7 @@
 #include <assert.h>
 #include "lib/xalloc.h"
 #include "lib/contracts.h"
+#include "lib/ex6-helper.h"
 
 /**
  * ex6.c
@@ -27,15 +28,16 @@
 /**
  * struct of linked list node (containing int data & next pointer)
  * note: null-terminated lists
- * */
-typedef struct dna_node {
-    char data;
-    struct dna_node* next;
-} dna_node_t;
+ * note: defined in header file
+ */
+// typedef struct dna_node {
+//     char data;
+//     struct dna_node* next;
+// } dna_node_t;
 
 /*
  * ---------------------------------------------------------------------------
- *                 SHORT HELPER FUNCTIONS (Defined in full below)
+ *                          SHORT HELPER FUNCTIONS
  * ---------------------------------------------------------------------------
  */
 
@@ -159,134 +161,4 @@ int main()
 {
     test();
     return 0;
-}
-
-/*
- * ---------------------------------------------------------------------------
- *                 DON'T WORRY ABOUT ANYTHING BELOW HERE
- * ---------------------------------------------------------------------------
- */
-
-/**
- * this function frees strand from start
- * takes in: start -  of dna strand
- * THIS IS A CORRECT FUNCTION
- */
-void dna_free(dna_node_t *start)
-{
-    dna_node_t *curr = start;
-    while (curr!=NULL)
-    {
-        dna_node_t *next = curr->next;
-        free(curr);
-        curr = next;
-    }
-}
-
-/**
- * this function checks if two strands (linked lists) are equal
- * takes in: first - strand to check; second - strand to check
- * returns: whether two strands are the same
- * THIS IS A CORRECT FUNCTION
- */
-bool strand_equal(dna_node_t *first, dna_node_t *second)
-{
-    while (first != NULL)
-    {
-        if (second == NULL) // first longer than second
-        {
-            return false;
-        }
-        if (first->data != second->data)
-        {
-            return false; // data don't match
-        }
-        first = first->next;
-        second = second->next;
-    }
-
-    if (second != NULL)
-    {
-        return false; // second longer than first
-    }
-    return true;
-}
-
-/**
- * this function create a node object with content as the data
- * takes in: content - data to be stored in node
- * returns: resulting node
- * THIS IS A CORRECT FUNCTION
- */
-dna_node_t *create_node(char content)
-{
-    dna_node_t *new = xcalloc(sizeof(dna_node_t), 1);
-    new->data = content;
-    return new;
-}
-
-/**
- * this function get the opposite DNA char type (T-A and G-C)
- * takes in: content - char to be flipped
- * returns: flipped char
- * THIS IS A CORRRECT FUNCTION
- */
-char get_opposite_dna(char content)
-{
-    switch (content)
-    {
-        case 'A':
-            return 'T';
-            break;
-        case 'T':
-            return 'A';
-            break;
-        case 'G':
-            return 'C';
-            break;
-        case 'C':
-            return 'G';
-            break;
-        default:
-            printf("Impossible DNA element passed");
-    }
-    printf("Failed to invert");
-    return 'X';
-}
-
-/**
- * this function create a strand object from a string
- * takes in: str - string to be used to create a strand; 
- *           flip - boolean to determine to make strand or flipped strand
- * returns: the first node of the resultant linked list
- * THIS IS A CORRECT FUNCTION
- */
-dna_node_t *create_strand(char *str, bool flip)
-{
-    dna_node_t *curr = NULL;
-    dna_node_t *start = NULL;
-    for (int i = 0; str[i] != '\0'; i++)
-    {
-        char input;
-        if (!flip)
-        {
-            input = str[i];
-        }
-        else
-        {
-            input = get_opposite_dna(str[i]);
-        }
-
-        if(start == NULL)
-        {
-            start = create_node(input);
-            curr = start;
-        }
-        else
-        {
-            curr->next = create_node(input);
-            curr = curr->next;
-        }
-    }
-    return start;
 }

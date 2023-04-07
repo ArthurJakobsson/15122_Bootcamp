@@ -4,7 +4,7 @@
 #include <assert.h>
 
 /**
- * ex1.c
+ * ex1-bad.c
  * Example (1) demonstrating print statement debugging (TA step-through)
  *
  * 15-122: Principles of Imperative Computation

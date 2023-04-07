@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "lib/contracts.h"
 #include "lib/xalloc.h"
+#include "lib/ex2-helper.h"
 
 /**
  * ex2.c
@@ -22,7 +23,7 @@
 
 /*
  * ---------------------------------------------------------------------------
- *                 SHORT HELPER FUNCTIONS (Defined in full below)
+ *                          SHORT HELPER FUNCTIONS
  * ---------------------------------------------------------------------------
  */
 
@@ -83,19 +84,19 @@ int main()
     A[6] = 7;
     A[7] = 8;
 
-    fizzed_and_buzzed(A, 10);
+    fizzed_and_buzzed(A, 8);
 
     int *A_res = xcalloc(sizeof(int), 8); 
     A_res[0] = 4;
-    A_res[1] = 7;
+    A_res[1] = 1;
     A_res[2] = 2;
-    A_res[3] = 14;
+    A_res[3] = -1;
     A_res[4] = 28;
     A_res[5] = 5;
     A_res[6] = 7;
-    A_res[7] = 8;
+    A_res[7] = 0;
     
-    assert(arrs_equal(A, A_res, 10, 10));
+    assert(arrs_equal(A, A_res, 8, 8));
 
     int *B = xcalloc(sizeof(int), 7); 
     B[0] = 7;
@@ -126,28 +127,4 @@ int main()
 
     printf("All tests passed! \n");
     return 0;
-}
-
-
-/*
- * ---------------------------------------------------------------------------
- *                 DON'T WORRY ABOUT ANYTHING BELOW HERE
- * ---------------------------------------------------------------------------
- */
-
-/**
- * this function checks if two arrays are equal by looking at each element
- * takes in: A - array of ints; B - array of ints; 
- *           len_A of array A; len_B of array B
- * returns: whether A and B are the same array
- * THIS IS A CORRECT FUNCTION!
- */
-bool arrs_equal(int *A, int *B, int len_A, int len_B)
-{
-    if (len_A != len_B) return false;
-    for (int i = 0; i < len_A; i++)
-    {
-        if (A[i] != B[i]) return false;
-    }
-    return true;
 }

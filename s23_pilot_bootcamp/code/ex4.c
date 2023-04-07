@@ -4,6 +4,7 @@
 #include <errno.h>
 #include <stdbool.h>
 #include "lib/xalloc.h"
+#include "lib/ex4-helper.h"
 
 /**
  * ex4.c
@@ -27,15 +28,18 @@
  * ---------------------------------------------------------------------------
  */
 
-/** struct of triangle node (containing int array data & size) */
-typedef struct triangle_header {
-    int **data;
-    long size;
-} triangle;
+/** 
+ * struct of triangle node (containing int array data & size) 
+ * note: defined in header file 
+ */
+// typedef struct triangle_header {
+//     int **data;
+//     long size;
+// } triangle;
 
 /*
  * ---------------------------------------------------------------------------
- *                 SHORT HELPER FUNCTIONS (Defined in full below)
+ *                          SHORT HELPER FUNCTIONS
  * ---------------------------------------------------------------------------
  */
 
@@ -100,27 +104,4 @@ int main()
     }
     free(my_triangle);
     return 0;
-}
-
-/*
- * ---------------------------------------------------------------------------
- *                 DON'T WORRY ABOUT ANYTHING BELOW HERE
- * ---------------------------------------------------------------------------
- */
-
-/**
- * this function prints out triangle, given number of rows
- * takes in: tri - 2d array representing triangle; num_rows - number of rows
- * THIS IS A CORRECT FUNCTION!
-*/
-void print_triangle(int **tri, int num_rows)
-{
-    for (int i = 0; i < num_rows; i++)
-    {
-        for (int j = 0; j <= i; j++)
-        {
-            printf("%d ", tri[i][j]);
-        }
-        printf("\n");
-    }
 }

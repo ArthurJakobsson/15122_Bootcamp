@@ -44,7 +44,7 @@ pixel create_pixel(int a, int r, int g, int b);
  * - alpha: add 1 unless it is max (max = 0xFF)
  * - red:   remove bottom 4 bits
  * - green: divide by two
- * - blue   remove top 4 bits
+ * - blue:  remove top 4 bits
  */
 
 /** 
@@ -57,7 +57,7 @@ int new_alpha_in_position(pixel pix)
 {
     int mask = 0xFF;
     int alpha_val = ((int)pix >> 24) & mask;
-    if (alpha_val==mask) // add this "if"
+    if (alpha_val == mask) // add this "if"
     {
         return alpha_val << 24;
     }
