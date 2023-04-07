@@ -18,7 +18,7 @@
  * @author Liz Chu <echu2@andrew.cmu.edu>
  */
 
-// typedef int pixel; // NOTE the lack of a star (not a pointer)
+// typedef uint32_t pixel; // NOTE the lack of a star (not a pointer)
 // note: defined in header file
 
 /*
@@ -27,13 +27,13 @@
  * ---------------------------------------------------------------------------
  */
 
-/** 
+/**
  * this function creates a pixel based on given argb values
  * takes in: a - alpha value; red - red value; g - green value; b - blue value
  * returns: pixel created
  * THIS IS A CORRECT FUNCTION
  */
-pixel create_pixel(int a, int r, int g, int b);
+pixel create_pixel(uint32_t a, uint32_t r, uint32_t g, uint32_t b);
 
 /*
  * ---------------------------------------------------------------------------
@@ -49,62 +49,62 @@ pixel create_pixel(int a, int r, int g, int b);
  * - blue:  remove top 4 bits
  */
 
-/** 
- * this function updates alpha value based on rules 
+/**
+ * this function updates alpha value based on rules
  * takes in: pix - pixel to be updated
  * returns: updated alpha value in position
  * TODO: fix the bugs in this function, if any
  */
-int new_alpha_in_position(pixel pix)
+uint32_t new_alpha_in_position(pixel pix)
 {
-    int mask = 0xFF;
-    int alpha_val = ((int)pix >> 24) & mask;
+    uint32_t mask = 0xFF;
+    uint32_t alpha_val = ((int)pix >> 24) & mask;
 
-    int result = (alpha_val + 1) << 24;
+    uint32_t result = (alpha_val + 1) << 24;
     return result;
 }
 
-/** 
- * this function updates red value based on rules 
+/**
+ * this function updates red value based on rules
  * takes in: pix - pixel to be updated
  * returns: updated red value in position
  * TODO: fix the bugs in this function, if any
  */
-int new_red_in_position(pixel pix)
+uint32_t new_red_in_position(pixel pix)
 {
-    int mask = 0x0F;
-    int red_val = ((int)pix) & (mask << 16);
+    uint32_t mask = 0x0F;
+    uint32_t red_val = ((int)pix) & (mask << 16);
     return red_val;
 }
 
-/** 
- * this function updates green value based on rules 
+/**
+ * this function updates green value based on rules
  * takes in: pix - pixel to be updated
  * returns: updated green value in position
  * TODO: fix the bugs in this function, if any
  */
-int new_green_in_position(pixel pix)
+uint32_t new_green_in_position(pixel pix)
 {
-    int mask = 0xFF;
-    int green_val = ((int)pix) & (mask << 8);
+    uint32_t mask = 0xFF;
+    uint32_t green_val = ((int)pix) & (mask << 8);
     // divide by two
     return (green_val >> 1);
 }
 
-/** 
- * this function updates blue value based on rules 
+/**
+ * this function updates blue value based on rules
  * takes in: pix - pixel to be updated
  * returns: updated blue value in position
  * TODO: fix the bugs in this function, if any
  */
-int new_blue_in_position(pixel pix)
+uint32_t new_blue_in_position(pixel pix)
 {
-    int mask = 0xF0;
-    int blue_val = ((int)pix) & mask;
+    uint32_t mask = 0xF0;
+    uint32_t blue_val = ((int)pix) & mask;
     return blue_val;
 }
 
-/** 
+/**
  * this function remixes pixel based on given rules
  * takes in: pix - pixel to be remixed
  * returns: remixed pixel
@@ -112,10 +112,10 @@ int new_blue_in_position(pixel pix)
  */
 pixel remix_pixel(pixel pix)
 {
-    int a = new_alpha_in_position(pix);
-    int r = new_red_in_position(pix);
-    int g = new_green_in_position(pix);
-    int b = new_blue_in_position(pix);
+    uint32_t a = new_alpha_in_position(pix);
+    uint32_t r = new_red_in_position(pix);
+    uint32_t g = new_green_in_position(pix);
+    uint32_t b = new_blue_in_position(pix);
     return a | r | g | b;
 }
 

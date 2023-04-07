@@ -4,7 +4,7 @@
 #include <assert.h>
 #include "contracts.h"
 
-typedef int pixel; // NOTE the lack of a star (not a pointer)
+typedef uint32_t pixel; // NOTE the lack of a star (not a pointer)
 
 /*
  * ---------------------------------------------------------------------------
@@ -12,10 +12,10 @@ typedef int pixel; // NOTE the lack of a star (not a pointer)
  * ---------------------------------------------------------------------------
  */
 
-/** 
+/**
  * this function creates a pixel based on given argb values
  * takes in: a - alpha value; red - red value; g - green value; b - blue value
  * returns: pixel created
  * THIS IS A CORRECT FUNCTION
  */
-pixel create_pixel(int a, int r, int g, int b); 
+pixel create_pixel(uint32_t a, uint32_t r, uint32_t g, uint32_t b);
