@@ -4,10 +4,11 @@
 #include <errno.h>
 #include <stdbool.h>
 #include "lib/xalloc.h"
+#include "lib/ex4-helper.h"
 
 /**
- * @file ex4.c
- * @brief Example (4) practicing valgrind debugging (student)
+ * ex4.c
+ * Example (4) practicing valgrind debugging (student)
  *
  * 15-122: Principles of Imperative Computation
  * Spring 2023 - Debugging in C Pilot Bootcamp
@@ -27,23 +28,27 @@
  * ---------------------------------------------------------------------------
  */
 
-/** @brief struct of triangle node (containing int array data & size)*/
-typedef struct triangle_header {
-    int** data;
-    long size;
-} triangle;
+/** 
+ * struct of triangle node (containing int array data & size) 
+ * note: defined in header file 
+ */
+// typedef struct triangle_header {
+//     int **data;
+//     long size;
+// } triangle;
 
 /*
  * ---------------------------------------------------------------------------
- *                 SHORT HELPER FUNCTIONS (Defined in full below)
+ *                          SHORT HELPER FUNCTIONS
  * ---------------------------------------------------------------------------
  */
 
 /**
- * @brief Forward definition, prints out triangle, given number of rows
+ * this function prints out triangle, given number of rows
+ * takes in: tri - 2d array representing triangle; num_rows - number of rows
  * THIS IS A CORRECT FUNCTION!
 */
-void print_triangle(int** tri, int num_rows);
+void print_triangle(int **tri, int num_rows);
 
 /*
  * ---------------------------------------------------------------------------
@@ -52,15 +57,14 @@ void print_triangle(int** tri, int num_rows);
  */
 
 /**
- * @brief generates a pascal's triangle, given a struct and number of rows
- * @param my_tri triangle to create
- * @param num_rows number of rows in triangle
- * @return triangle generated
+ * this function generates a pascal's triangle, given a struct and number of rows
+ * takes in: my_tri - triangle to create; num_rows - number of rows in triangle
+ * returns: triangle generated
  * TODO: fix the bugs in this function
  */
-triangle *generate(triangle* my_tri, int num_rows)
+triangle *generate(triangle *my_tri, int num_rows)
 {
-    int** tri_data = xcalloc(num_rows, sizeof(int*));
+    int **tri_data = xcalloc(num_rows, sizeof(int*));
 
     my_tri->data = tri_data;
     my_tri->size = num_rows;
@@ -81,14 +85,14 @@ triangle *generate(triangle* my_tri, int num_rows)
 }
 
 /**
- * @brief creates a pascal's triangle, prints it, and frees all alloc'ed memory
+ * this function creates a pascal's triangle, prints it, and frees all alloc'ed memory
  * TODO: fix the bugs in this function
  */
 int main()
 {
     int num_rows = 7;
 
-    triangle* my_triangle = xmalloc(sizeof(triangle));
+    triangle *my_triangle = xmalloc(sizeof(triangle));
 
     my_triangle = generate(my_triangle, num_rows);
     print_triangle(my_triangle->data, num_rows); // just prints the triangle
@@ -100,28 +104,4 @@ int main()
     }
     free(my_triangle);
     return 0;
-}
-
-/*
- * ---------------------------------------------------------------------------
- *                 DON'T WORRY ABOUT ANYTHING BELOW HERE
- * ---------------------------------------------------------------------------
- */
-
-/**
- * @brief prints out triangle, given number of rows
- * @param tri 2d array representing triangle
- * @param num_rows number of rows
- * THIS IS A CORRECT FUNCTION!
-*/
-void print_triangle(int** tri, int num_rows)
-{
-    for (int i = 0; i < num_rows; i++)
-    {
-        for (int j = 0; j <= i; j++)
-        {
-            printf("%d ", tri[i][j]);
-        }
-        printf("\n");
-    }
 }

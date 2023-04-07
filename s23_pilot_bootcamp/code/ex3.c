@@ -4,10 +4,11 @@
 #include <stdint.h>
 #include "lib/xalloc.h"
 #include "lib/contracts.h"
+#include "lib/ex3-helper.h"
 
 /**
- * @file ex3.c
- * @brief Example (3) practicing valgrind debugging (TA step-through)
+ * ex3.c
+ * Example (3) practicing valgrind debugging (TA step-through)
  *
  * 15-122: Principles of Imperative Computation
  * Spring 2023 - Debugging in C Pilot Bootcamp
@@ -28,43 +29,50 @@
  */
 
 /** 
- * @brief struct of linked list node (containing int data & next pointer) 
+ * struct of linked list node (containing int data & next pointer) 
  * note: null-terminated lists
+ * note: defined in header file
  * */
-typedef struct list_node {
-    int data;
-    struct list_node* next;
-} node;
+
+// typedef struct list_node {
+//     int data;
+//     struct list_node *next;
+// } node;
 
 /*
  * ---------------------------------------------------------------------------
- *                 SHORT HELPER FUNCTIONS (Defined in full below)
+ *                          SHORT HELPER FUNCTIONS
  * ---------------------------------------------------------------------------
  */
 
 /**
- * @brief checks if list starting at node L is sorted
- * THIS IS A CORRECT FUNCTION!
+ * this function checks if list starting at node L is sorted
+ * takes in: L - start node of list
+ * THIS IS A CORRECT FUNCTION
  */
-bool is_sorted(node* L);
+bool is_sorted(node *L);
 
 /**
- * @brief checks if list starting at node L has duplicates
- * THIS IS A CORRECT FUNCTION!
+ * this function checks if list starting at node L has duplicates
+ * takes in: L - start node of list
+ * precondition: list L has to be sorted
+ * THIS IS A CORRECT FUNCTION
  */
-bool no_dupes(node* L);
+bool no_dupes(node *L);
 
 /**
- * @brief helper function to free list
- * THIS IS A CORRECT FUNCTION!
+ * this is a helper function to free list
+ * takes in: L - start node of list
+ * THIS IS A CORRECT FUNCTION
  */
-void free_list(node* L);
+void free_list(node *L);
 
 /**
- * @brief prints out the list starting at L for debugging purposes
- * THIS IS A CORRECT FUNCTION!
+ * this function prints out the list starting at L for debugging purposes
+ * takes in: L - start node of list
+ * THIS IS A CORRECT FUNCTION
  */
-void print_list(node* L);
+void print_list(node *L);
 
 /*
  * ---------------------------------------------------------------------------
@@ -73,19 +81,19 @@ void print_list(node* L);
  */
 
 /**
- * @brief removes duplicates from a sorted list starting at L
- * @pre list L must be sorted
+ * this function removes duplicates from a sorted list starting at L
+ * precondition: list L must be sorted
  * TODO: fix the bugs in this function
  */
-node* remove_duplicates(node* L)
+node* remove_duplicates(node *L)
 {
     REQUIRES(is_sorted(L));
-    node* curr = L;
+    node *curr = L;
     while (curr != NULL && curr->next != NULL)
     {
         if (curr->next->data == curr->data)
         {
-            node* temp = curr->next;
+            node *temp = curr->next;
             curr->next = curr->next->next;
             free(temp);
         }
@@ -101,7 +109,7 @@ node* remove_duplicates(node* L)
 // TODO: fix the bugs in this function
 int main()
 {
-    node* L1 = calloc(sizeof(node), 1);
+    node *L1 = calloc(sizeof(node), 1);
     L1->data = 3;
     L1->next = calloc(sizeof(node), 1);
     L1->next->data = 3;
@@ -112,7 +120,7 @@ int main()
     L1->next->next->next->next = calloc(sizeof(node), 1);
     L1->next->next->next->next->data = 7;
 
-    node* L2 = calloc(sizeof(node), 1);
+    node *L2 = calloc(sizeof(node), 1);
     L2->data = 1;
     L2->next = calloc(sizeof(node), 1);
     L2->next->data = 1;
@@ -132,82 +140,4 @@ int main()
     L2->next = NULL;
 
     return 0;
-}
-
-/*
- * ---------------------------------------------------------------------------
- *                 DON'T WORRY ABOUT ANYTHING BELOW HERE
- * ---------------------------------------------------------------------------
- */
-
-/**
- * @brief checks if list starting at node L is sorted
- * @param L start node of list
- * THIS IS A CORRECT FUNCTION
- */
-bool is_sorted(node* L)
-{
-    node* curr = L;
-    node* next = L->next;
-    while (next != NULL)
-    {
-        if (curr->data > next->data) return false;
-        curr = next;
-        next = next->next;
-    }
-    return true;
-}
-
-/**
- * @brief checks if list starting at node L has duplicates
- * @param L start node of list
- * @pre list L has to be sorted
- * THIS IS A CORRECT FUNCTION
- */
-bool no_dupes(node* L)
-{
-    REQUIRES(is_sorted(L));
-
-    node* curr = L;
-    node* next = L->next;
-    while (next != NULL)
-    {
-        if (curr->data == next->data) return false;
-        curr = next;
-        next = next->next;
-    }
-    return true;
-}
-
-/**
- * @brief helper function to free list
- * @param L start node of list
- * THIS IS A CORRECT FUNCTION
- */
-void free_list(node* L)
-{
-    node* temp;
-    while (L != NULL)
-    {
-        temp = L->next;
-        free(L);
-        L = temp;
-    }
-
-}
-
-/**
- * @brief prints out the list starting at L for debugging purposes
- * @param L start node of list
- * THIS IS A CORRECT FUNCTION
- */
-void print_list(node* L)
-{
-    node* curr = L;
-    while (curr != NULL)
-    {
-        printf("%d --> ", curr->data);
-        curr = curr->next;
-    }
-    printf("NULL\n");
 }

@@ -6,8 +6,8 @@
 #include "lib/xalloc.h"
 
 /**
- * @file ex2-correct.c
- * @brief Example (2) practicing print statement debugging (student)
+ * ex2-correct.c
+ * Example (2) practicing print statement debugging (student)
  *
  * 15-122: Principles of Imperative Computation
  * Spring 2023 - Debugging in C Pilot Bootcamp
@@ -27,7 +27,10 @@
  */
 
 /**
- * @brief checks if two arrays are equal by looking at each element
+ * this function checks if two arrays are equal by looking at each element
+ * takes in: A - array of ints; B - array of ints; 
+ *           len_A of array A; len_B of array B
+ * returns: whether A and B are the same array
  * THIS IS A CORRECT FUNCTION!
  */
 bool arrs_equal(int *A, int *B, int len_A, int len_B);
@@ -39,9 +42,8 @@ bool arrs_equal(int *A, int *B, int len_A, int len_B);
  */
 
 /**
- * @brief applys fizzedbuzzed rules onto given array A of length len
- * @param A int array
- * @param len of array
+ * this function applys fizzedbuzzed rules onto given array A of length len
+ * takes in: A - int array; len - of array
  * TODO: fix the bugs in this function
  */
 void fizzed_and_buzzed(int *A, int len)
@@ -69,7 +71,6 @@ void fizzed_and_buzzed(int *A, int len)
     }
 }
 
-
 /*
  * ---------------------------------------------------------------------------
  *                                Test Cases
@@ -88,19 +89,19 @@ int main()
     A[6] = 7;
     A[7] = 8;
 
-    fizzed_and_buzzed(A, 10);
+    fizzed_and_buzzed(A, 8);
 
     int *A_res = xcalloc(sizeof(int), 8); 
     A_res[0] = 4;
-    A_res[1] = 7;
+    A_res[1] = 1;
     A_res[2] = 2;
-    A_res[3] = 14;
+    A_res[3] = -1;
     A_res[4] = 28;
     A_res[5] = 5;
     A_res[6] = 7;
-    A_res[7] = 8;
+    A_res[7] = 0;
     
-    assert(arrs_equal(A, A_res, 10, 10));
+    assert(arrs_equal(A, A_res, 8, 8));
 
     int *B = xcalloc(sizeof(int), 7); 
     B[0] = 7;
@@ -133,6 +134,7 @@ int main()
     return 0;
 }
 
+
 /*
  * ---------------------------------------------------------------------------
  *                 DON'T WORRY ABOUT ANYTHING BELOW HERE
@@ -140,12 +142,10 @@ int main()
  */
 
 /**
- * @brief checks if two arrays are equal by looking at each element
- * @param A array of ints
- * @param B array of ints
- * @param len_A of array A
- * @param len_B of array B
- * @return whether A and B are the same array
+ * this function checks if two arrays are equal by looking at each element
+ * takes in: A - array of ints; B - array of ints; 
+ *           len_A of array A; len_B of array B
+ * returns: whether A and B are the same array
  * THIS IS A CORRECT FUNCTION!
  */
 bool arrs_equal(int *A, int *B, int len_A, int len_B)
