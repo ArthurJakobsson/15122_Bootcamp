@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <stdint.h>
 #include "lib/contracts.h"
 #include "lib/ex5-helper.h"
 
