@@ -32,12 +32,12 @@ Compiling example 3 (buggy)
 
 
  Compiling example 4 (correct) // TA FACING! EXCLUDE IN HANDOUT
-   % gcc -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex4-correct.c -o ex4-correct
-   % ./ex4-correct
+   % gcc -w -std=c99 -pedantic ex4.c -g -o ex4
+   % valgrind ./ex4-correct
 
 Compiling example 4 (buggy)
-   % gcc -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex4-bad.c -o ex4-bad
-   % ./ex4-bad
+   % gcc -w -std=c99 -pedantic ex4.c -g -o ex4
+   % valgrind ./ex4-bad
 
 
  Compiling example 5 (correct) // TA FACING! EXCLUDE IN HANDOUT
