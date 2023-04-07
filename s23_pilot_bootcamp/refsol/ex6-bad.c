@@ -124,7 +124,7 @@ dna_node_t *twist_my_dna(dna_node_t *first_strand, dna_node_t *second_strand)
         // what should the next block in the chain be? what contract can I write
     }
 
-    check_list(start);
+    ASSERT(check_list(start));
     return start;
 }
 

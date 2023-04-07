@@ -94,7 +94,10 @@ bool check_list(dna_node_t *start)
     while (curr != NULL)
     {
         // Should have an even number of data
-        ASSERT(curr->next != NULL);
+        if(curr->next == NULL)
+        {
+            return false;
+        }
 
         dna_node_t *first = curr;
         dna_node_t *second = curr->next;
@@ -105,7 +108,10 @@ bool check_list(dna_node_t *start)
         printf("1st data : %c\n", second->data);
         printf("1st pointer: %p \n", (void*)second);
 
-        ASSERT(get_opposite_dna(first->data) == second->data);
+        if(get_opposite_dna(first->data) != second->data)
+        {
+            return false;
+        }
         curr = curr->next->next;
     }
     printf("\n");
@@ -147,7 +153,7 @@ dna_node_t *twist_my_dna(dna_node_t *first_strand, dna_node_t *second_strand)
     }
 
     ASSERT(first_curr == NULL && second_curr == NULL);
-    check_list(start);
+    ASSERT(check_list(start));
     return start;
 }
 

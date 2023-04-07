@@ -93,7 +93,7 @@ int main()
     my_triangle = generate(my_triangle, num_rows);
     print_triangle(my_triangle->data, num_rows); // just prints the triangle
 
-    free((int*)my_triangle->size);
+    free(my_triangle->size);
     for (int i = 0; i < num_rows - 1; i++)
     {
         free(my_triangle->data[i]);

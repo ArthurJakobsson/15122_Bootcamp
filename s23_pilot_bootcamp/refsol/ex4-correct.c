@@ -54,8 +54,8 @@ void print_triangle(int **tri, int num_rows);
 /**
  * @brief generates a pascal's triangle, given a struct and number of rows
  * @param my_tri triangle to create
- * @param num_rows number of rows in triangle 
- * @return triangle generated 
+ * @param num_rows number of rows in triangle
+ * @return triangle generated
  * TODO: fix the bugs in this function
  */
 triangle *generate(triangle *my_tri, int num_rows)
@@ -94,7 +94,7 @@ int main()
     my_triangle = generate(my_triangle, num_rows);
     print_triangle(my_triangle->data, num_rows); // just prints the triangle
 
-    // free((int*)my_triangle->size); <-- BUG 2 IS HERE delete this
+    // free(my_triangle->size); <-- BUG 2 IS HERE delete this
     for (int i = 0; i < num_rows; i++) // <-- BUG 3 IS HERE change bounds
     {
         free(my_triangle->data[i]);
@@ -113,7 +113,7 @@ int main()
 /**
  * @brief prints out triangle, given number of rows
  * @param tri 2d array representing triangle
- * @param num_rows number of rows 
+ * @param num_rows number of rows
  * THIS IS A CORRECT FUNCTION!
 */
 void print_triangle(int **tri, int num_rows)
