@@ -6,8 +6,8 @@
 #include "lib/contracts.h"
 
 /**
- * @file ex3-correct.c
- * @brief Example (3) practicing valgrind debugging (TA step-through)
+ * ex3-correct.c
+ * Example (3) practicing valgrind debugging (TA step-through)
  *
  * 15-122: Principles of Imperative Computation
  * Spring 2023 - Debugging in C Pilot Bootcamp
@@ -28,7 +28,7 @@
  */
 
 /** 
- * @brief struct of linked list node (containing int data & next pointer) 
+ * struct of linked list node (containing int data & next pointer) 
  * note: null-terminated lists
  * */
 typedef struct list_node {
@@ -43,26 +43,31 @@ typedef struct list_node {
  */
 
 /**
- * @brief checks if list starting at node L is sorted
- * THIS IS A CORRECT FUNCTION!
+ * this function checks if list starting at node L is sorted
+ * takes in: L - start node of list
+ * THIS IS A CORRECT FUNCTION
  */
 bool is_sorted(node *L);
 
 /**
- * @brief checks if list starting at node L has duplicates
- * THIS IS A CORRECT FUNCTION!
+ * this function checks if list starting at node L has duplicates
+ * takes in: L - start node of list
+ * precondition: list L has to be sorted
+ * THIS IS A CORRECT FUNCTION
  */
 bool no_dupes(node *L);
 
 /**
- * @brief helper function to free list
- * THIS IS A CORRECT FUNCTION!
+ * this is a helper function to free list
+ * takes in: L - start node of list
+ * THIS IS A CORRECT FUNCTION
  */
 void free_list(node *L);
 
 /**
- * @brief prints out the list starting at L for debugging purposes
- * THIS IS A CORRECT FUNCTION!
+ * this function prints out the list starting at L for debugging purposes
+ * takes in: L - start node of list
+ * THIS IS A CORRECT FUNCTION
  */
 void print_list(node *L);
 
@@ -73,11 +78,11 @@ void print_list(node *L);
  */
 
 /**
- * @brief removes duplicates from a sorted list starting at L
- * @pre list L must be sorted
+ * this function removes duplicates from a sorted list starting at L
+ * precondition: list L must be sorted
  * TODO: fix the bugs in this function
  */
-node *remove_duplicates(node *L)
+node* remove_duplicates(node *L)
 {
     REQUIRES(is_sorted(L));
     node *curr = L;
@@ -92,7 +97,7 @@ node *remove_duplicates(node *L)
         else
         {
             curr = curr->next;
-            // free(curr); <-- REMOVE THIS LINE
+            // free(curr); <- remove this line
         }
     }
     return L;
@@ -129,7 +134,7 @@ int main()
     printf("All tests passed!\n");
     free_list(L1);
     free_list(L2);
-    // L2->next = NULL; <-- REMOVE THIS LINE
+    // L2->next = NULL; <- remove this line
 
     return 0;
 }
@@ -141,8 +146,8 @@ int main()
  */
 
 /**
- * @brief checks if list starting at node L is sorted
- * @param L start node of list
+ * this function checks if list starting at node L is sorted
+ * takes in: L - start node of list
  * THIS IS A CORRECT FUNCTION
  */
 bool is_sorted(node *L)
@@ -159,9 +164,9 @@ bool is_sorted(node *L)
 }
 
 /**
- * @brief checks if list starting at node L has duplicates
- * @param L start node of list
- * @pre list L has to be sorted
+ * this function checks if list starting at node L has duplicates
+ * takes in: L - start node of list
+ * precondition: list L has to be sorted
  * THIS IS A CORRECT FUNCTION
  */
 bool no_dupes(node *L)
@@ -180,8 +185,8 @@ bool no_dupes(node *L)
 }
 
 /**
- * @brief helper function to free list
- * @param L start node of list
+ * this is a helper function to free list
+ * takes in: L - start node of list
  * THIS IS A CORRECT FUNCTION
  */
 void free_list(node *L)
@@ -197,8 +202,8 @@ void free_list(node *L)
 }
 
 /**
- * @brief prints out the list starting at L for debugging purposes
- * @param L start node of list
+ * this function prints out the list starting at L for debugging purposes
+ * takes in: L - start node of list
  * THIS IS A CORRECT FUNCTION
  */
 void print_list(node *L)

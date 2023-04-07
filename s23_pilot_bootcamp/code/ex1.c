@@ -4,8 +4,8 @@
 #include <assert.h>
 
 /**
- * @file ex1.c
- * @brief Example (1) demonstrating print statement debugging (TA step-through)
+ * ex1.c
+ * Example (1) demonstrating print statement debugging (TA step-through)
  *
  * 15-122: Principles of Imperative Computation
  * Spring 2023 - Debugging in C Pilot Bootcamp
@@ -20,8 +20,9 @@
  */
 
 /**
- * @brief computes nth term of the fibonacci sequence
- * @return nth fibonacci term
+ * this function computes nth term of the fibonacci sequence
+ * takes in: fibonacci term to return
+ * returns: nth fibonacci term
  * TODO: fix the bugs in this function
  */
 int fib(int n)

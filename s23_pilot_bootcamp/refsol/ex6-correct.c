@@ -6,8 +6,8 @@
 #include "lib/contracts.h"
 
 /**
- * @file ex6-correct.c
- * @brief Example (6) demonstrating test cases and contracts (student)
+ * ex6-correct.c
+ * Example (6) demonstrating test cases and contracts (student)
  *
  * 15-122: Principles of Imperative Computation
  * Spring 2023 - Debugging in C Pilot Bootcamp
@@ -25,7 +25,7 @@
  */
 
 /**
- * @brief struct of linked list node (containing int data & next pointer)
+ * struct of linked list node (containing int data & next pointer)
  * note: null-terminated lists
  * */
 typedef struct dna_node {
@@ -40,41 +40,44 @@ typedef struct dna_node {
  */
 
 /**
- * @brief frees strand from start
+ * this function frees strand from start
+ * takes in: start -  of dna strand
  * THIS IS A CORRECT FUNCTION
  */
 void dna_free(dna_node_t *start);
 
 /**
- * @brief checks if two strands (linked lists) are equal
+ * this function checks if two strands (linked lists) are equal
+ * takes in: first - strand to check; second - strand to check
+ * returns: whether two strands are the same
  * THIS IS A CORRECT FUNCTION
  */
 bool strand_equal(dna_node_t *first, dna_node_t *second);
 
 /**
- * @brief create a node object with content as the data
+ * this function create a node object with content as the data
+ * takes in: content - data to be stored in node
+ * returns: resulting node
  * THIS IS A CORRECT FUNCTION
  */
 dna_node_t *create_node(char content);
 
 /**
- * @brief create a strand object from a string
- *
- * str represents the DNA string to create.
- * FLIP represents whether to create the exact string or the opposite string
- * ex: str = "ATGC", flip = false; output: A->T->G->C
- * ex2: str = "ATGC", flip = true; output: T->A->C->G
- *
- * THIS IS A CORRECT FUNCTION
- */
-dna_node_t *create_strand(char *str, bool flip);
-
-/**
- * @brief get the opposite DNA char type (T-A and G-C)
+ * this function get the opposite DNA char type (T-A and G-C)
+ * takes in: content - char to be flipped
+ * returns: flipped char
  * THIS IS A CORRRECT FUNCTION
  */
 char get_opposite_dna(char content);
 
+/**
+ * this function create a strand object from a string
+ * takes in: str - string to be used to create a strand; 
+ *           flip - boolean to determine to make strand or flipped strand
+ * returns: the first node of the resultant linked list
+ * THIS IS A CORRECT FUNCTION
+ */
+dna_node_t *create_strand(char *str, bool flip);
 
 /*
  * ---------------------------------------------------------------------------
@@ -83,9 +86,9 @@ char get_opposite_dna(char content);
  */
 
 /**
- * @brief checks integrity of linked list (currently prints)
- * @param start of DNA list
- * @return whether list is valid
+ * this function checks integrity of linked list (currently prints)
+ * takes in: start - of DNA list
+ * returns: whether list is valid
  * TODO: write contracts for this function
  */
 bool check_list(dna_node_t *start)
@@ -93,7 +96,7 @@ bool check_list(dna_node_t *start)
     dna_node_t *curr = start;
     while (curr != NULL)
     {
-        // Should have an even number of data
+        // should have an even number of data
         if(curr->next == NULL)
         {
             return false;
@@ -125,10 +128,9 @@ bool check_list(dna_node_t *start)
  */
 
 /**
- * @brief creates twisted DNA strand based on two individual DNA strands *
- * @param first_strand to twist
- * @param second_strand to twist
- * @return twisted DNA strand that combines first and second
+ * this function creates twisted DNA strand based on two individual DNA strands *
+ * takes in: first_strand - to twist; second_strand - to twist
+ * returns: twisted DNA strand that combines first and second
  * TODO: fix the bugs in this function
  */
 dna_node_t *twist_my_dna(dna_node_t *first_strand, dna_node_t *second_strand)
@@ -164,7 +166,7 @@ dna_node_t *twist_my_dna(dna_node_t *first_strand, dna_node_t *second_strand)
  */
 
 /**
- * @brief tester function
+ * this is a tester function
  */
 void test()
 {
@@ -173,7 +175,7 @@ void test()
     dna_node_t * test_1_strand_2 = create_strand(test1, true);
     dna_node_t * twisted_dna_1 = twist_my_dna(test_1_strand_1, test_1_strand_2);
     dna_free(twisted_dna_1);
-    //twisted should contain all the strand 1 and 2 nodes
+    // twisted should contain all the strand 1 and 2 nodes
 
     char test2[] = "AAAA";
     char correctOutput2[] = "ATATATAT";
@@ -183,7 +185,8 @@ void test()
     dna_node_t * twistedDNA2 = twist_my_dna(test_2_strand_1, test_2_strand_2);
     ASSERT(strand_equal(test_2_correct_output, twistedDNA2));
     dna_free(test_2_correct_output);
-    dna_free(twistedDNA2); //twisted should contain all the strand 1 and 2 nodes
+    dna_free(twistedDNA2); 
+    // twisted should contain all the strand 1 and 2 nodes
 
     char test3[] = "TCGA";
     char correctOutput3[] = "TACGGCAT";
@@ -219,8 +222,8 @@ int main()
  */
 
 /**
- * @brief frees strand from start
- * @param start of dna strand
+ * this function frees strand from start
+ * takes in: start -  of dna strand
  * THIS IS A CORRECT FUNCTION
  */
 void dna_free(dna_node_t *start)
@@ -234,25 +237,23 @@ void dna_free(dna_node_t *start)
     }
 }
 
-
 /**
- * @brief checks if two strands (linked lists) are equal
- * @param first strand to check
- * @param second strand to check
- * @return whether two strands are the same
+ * this function checks if two strands (linked lists) are equal
+ * takes in: first - strand to check; second - strand to check
+ * returns: whether two strands are the same
  * THIS IS A CORRECT FUNCTION
  */
 bool strand_equal(dna_node_t *first, dna_node_t *second)
 {
     while (first != NULL)
     {
-        if (second == NULL) //first longer than second
+        if (second == NULL) // first longer than second
         {
             return false;
         }
         if (first->data != second->data)
         {
-            return false; //data don't match
+            return false; // data don't match
         }
         first = first->next;
         second = second->next;
@@ -260,15 +261,15 @@ bool strand_equal(dna_node_t *first, dna_node_t *second)
 
     if (second != NULL)
     {
-        return false; //second longer than first
+        return false; // second longer than first
     }
     return true;
 }
 
 /**
- * @brief create a node object with content as the data
- * @param content data to be stored in node
- * @return resulting node
+ * this function create a node object with content as the data
+ * takes in: content - data to be stored in node
+ * returns: resulting node
  * THIS IS A CORRECT FUNCTION
  */
 dna_node_t *create_node(char content)
@@ -279,9 +280,9 @@ dna_node_t *create_node(char content)
 }
 
 /**
- * @brief get the opposite DNA char type (T-A and G-C)
- * @param content char to be flipped
- * @return flipped char
+ * this function get the opposite DNA char type (T-A and G-C)
+ * takes in: content - char to be flipped
+ * returns: flipped char
  * THIS IS A CORRRECT FUNCTION
  */
 char get_opposite_dna(char content)
@@ -308,10 +309,10 @@ char get_opposite_dna(char content)
 }
 
 /**
- * @brief create a strand object from a string
- * @param str string to be used to create a strand
- * @param flip boolean to determine to make strand or flipped strand
- * @return the first node of the resultant linked list
+ * this function create a strand object from a string
+ * takes in: str - string to be used to create a strand; 
+ *           flip - boolean to determine to make strand or flipped strand
+ * returns: the first node of the resultant linked list
  * THIS IS A CORRECT FUNCTION
  */
 dna_node_t *create_strand(char *str, bool flip)

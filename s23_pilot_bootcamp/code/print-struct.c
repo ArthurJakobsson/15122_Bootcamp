@@ -6,7 +6,6 @@
 #include "lib/xalloc.h"
 #include "lib/contracts.h"
 
-
 /*
  * ---------------------------------------------------------------------------
  *                                 STRUCT
@@ -30,25 +29,24 @@ struct chonk{
  */
 
 /**
- * @brief Print null terminated linked list
- *
- * @param[in] first node
+ * this function prints NULL-terminated linked list
+ * takes in: node - first node of linked list
  */
 static void printList(chonky *node) {
     printf("\t\tFriends: ");
-    while (node != NULL) {
-        printf(" %s - ",node->name);
+    while (node != NULL) 
+    {
+        printf(" %s - ", node->name);
         node = node->next_chonk_friend;
     }
     printf("\n");
 }
 
 /**
- * @brief Prints goose
- *
- * @param[in] goose in question
+ * this function prints goose
+ * takes in: honk - goose in question
  */
-void printGoose(chonky *honk) {
+void print_goose(chonky *honk) {
     //name and address
     printf("\tName: %s, Address %p\n", honk->name, (void *)honk);
     //integer
@@ -71,33 +69,38 @@ void printGoose(chonky *honk) {
     }
     //boolean
     honk->canadian ? printf("\t\tFrom: Canada\n")
-                : printf("\t\tFrom: not Canada\n");
+                   : printf("\t\tFrom: not Canada\n");
     //linked list
     printList(honk->next_chonk_friend);
 }
 
 int main()
 {
-  chonky *example = xcalloc(sizeof(chonky), 1);
-  example->name = "Kevin";
-  example->height = 13;
-  example->color = 3;
-  example->canadian = true;
+    chonky *example = xcalloc(sizeof(chonky), 1);
+    example->name = "Kevin";
+    example->height = 13;
+    example->color = 3;
+    example->canadian = true;
 
-  //friends
-  chonky *f1 = xcalloc(sizeof(chonky), 1);
-  f1->name = "Allen";
-  chonky *f2 = xcalloc(sizeof(chonky), 1);
-  f2->name = "Jeffrey";
-  chonky *f3 = xcalloc(sizeof(chonky), 1);
-  f3->name = "Alex";
+    //friends
+    chonky *f1 = xcalloc(sizeof(chonky), 1);
+    f1->name = "Allen";
+    chonky *f2 = xcalloc(sizeof(chonky), 1);
+    f2->name = "Jeffrey";
+    chonky *f3 = xcalloc(sizeof(chonky), 1);
+    f3->name = "Alex";
 
-  example->next_chonk_friend = f1;
-  f1->next_chonk_friend = f2;
-  f2->next_chonk_friend = f3;
-  f3->next_chonk_friend = NULL;
-  printGoose(example);
-  return 0;
+    example->next_chonk_friend = f1;
+    f1->next_chonk_friend = f2;
+    f2->next_chonk_friend = f3;
+    f3->next_chonk_friend = NULL;
+    print_goose(example);
+
+    free(example); 
+    free(f1); 
+    free(f2); 
+    free(f3);
+    return 0;
 }
 
 

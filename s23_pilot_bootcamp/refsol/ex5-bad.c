@@ -5,8 +5,8 @@
 #include "lib/contracts.h"
 
 /**
- * @file ex5.c
- * @brief Example (5) demonstrating contracts and test cases (TA example)
+ * ex5-bad.c
+ * Example (5) demonstrating contracts and test cases (TA example)
  *
  * 15-122: Principles of Imperative Computation
  * Spring 2023 - Debugging in C Pilot Bootcamp
@@ -25,8 +25,10 @@ typedef int pixel; // NOTE the lack of a star (not a pointer)
  * ---------------------------------------------------------------------------
  */
 
-/**
- * @brief creates a pixel based on given argb values
+/** 
+ * this function creates a pixel based on given argb values
+ * takes in: a - alpha value; red - red value; g - green value; b - blue value
+ * returns: pixel created
  * THIS IS A CORRECT FUNCTION
  */
 pixel create_pixel(int a, int r, int g, int b);
@@ -46,9 +48,9 @@ pixel create_pixel(int a, int r, int g, int b);
  */
 
 /** 
- * @brief updates alpha value based on rules 
- * @param pix pixel to be updated
- * @return updated alpha value in position
+ * this function updates alpha value based on rules 
+ * takes in: pix - pixel to be updated
+ * returns: updated alpha value in position
  * TODO: fix the bugs in this function, if any
  */
 int new_alpha_in_position(pixel pix)
@@ -61,9 +63,9 @@ int new_alpha_in_position(pixel pix)
 }
 
 /** 
- * @brief updates red value based on rules 
- * @param pix pixel to be updated
- * @return updated red value in position
+ * this function updates red value based on rules 
+ * takes in: pix - pixel to be updated
+ * returns: updated red value in position
  * TODO: fix the bugs in this function, if any
  */
 int new_red_in_position(pixel pix)
@@ -74,9 +76,9 @@ int new_red_in_position(pixel pix)
 }
 
 /** 
- * @brief updates green value based on rules 
- * @param pix pixel to be updated
- * @return updated green value in position
+ * this function updates green value based on rules 
+ * takes in: pix - pixel to be updated
+ * returns: updated green value in position
  * TODO: fix the bugs in this function, if any
  */
 int new_green_in_position(pixel pix)
@@ -88,9 +90,9 @@ int new_green_in_position(pixel pix)
 }
 
 /** 
- * @brief updates blue value based on rules 
- * @param pix pixel to be updated
- * @return updated blue value in position
+ * this function updates blue value based on rules 
+ * takes in: pix - pixel to be updated
+ * returns: updated blue value in position
  * TODO: fix the bugs in this function, if any
  */
 int new_blue_in_position(pixel pix)
@@ -101,9 +103,9 @@ int new_blue_in_position(pixel pix)
 }
 
 /** 
- * @brief remixes pixel based on given rules
- * @param pix pixel to be remixed
- * @return remixed pixel
+ * this function remixes pixel based on given rules
+ * takes in: pix - pixel to be remixed
+ * returns: remixed pixel
  * TODO: fix the bugs in the other functions above to ensure this one's correct
  */
 pixel remix_pixel(pixel pix)
@@ -139,12 +141,10 @@ int main()
  */
 
 /** 
- * @brief creates a pixel based on given argb values
- * @param a alpha value
- * @param r red value
- * @param g green value
- * @param b blue value
- * @return pixel pixel created
+ * this function creates a pixel based on given argb values
+ * takes in: a - alpha value; red - red value; g - green value; b - blue value
+ * returns: pixel created
+ * THIS IS A CORRECT FUNCTION
  */
 pixel create_pixel(int a, int r, int g, int b)
 {
