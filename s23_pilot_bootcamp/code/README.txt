@@ -17,7 +17,7 @@ Compiling example 3
    % ./ex3
 
 Compiling example 4
-   % gcc -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex4.c -o ex4
+   % gcc -w -std=c99 -pedantic ex4.c -g -o ex4
    % valgrind ./ex4
 
 Compiling example 5 
