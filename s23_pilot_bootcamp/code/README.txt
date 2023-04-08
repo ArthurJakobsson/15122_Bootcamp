@@ -5,7 +5,7 @@ Spring 2023
 ==========================================================
 
 Compiling example 1
-   % gcc -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex1.c -o ex1
+   % gcc -fsanitize=undefined -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic ex1.c -o ex1
    % ./ex1
 
 Compiling example 2
@@ -17,7 +17,7 @@ Compiling example 3
    % ./ex3
 
 Compiling example 4
-   % gcc -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic lib/ex4-helper.o ex4.c -o ex4
+   % gcc -fsanitize=undefined -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic lib/ex4-helper.o ex4.c -o ex4
    % valgrind ./ex4
 
 Compiling example 5
@@ -29,5 +29,5 @@ Compiling example 6
    % ./ex6
 
 Compiling print-struct
-   % gcc -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic print-struct.c -o print-struct
+   % gcc -fsanitize=undefined -g -Wall -Wextra -Werror -Wshadow -std=c99 -pedantic print-struct.c -o print-struct
    % ./print-struct
